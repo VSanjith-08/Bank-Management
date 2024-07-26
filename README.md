@@ -42,16 +42,29 @@ git push origin main
 
 ###### ########## ######
 # To make a folder as repo
-go to that folder and type the following:
+# go to that folder and type the following:
 git init 
 git status
 git add .
 git commit -m "Created filenames"
-git remote add origin link
 git branch # If it returns master to display main
 git push origin master
+
 # [or] to change branch
 git branch -M main
 git branch
 
+git push origin main
+
+# To view all the branch
+git branch -a
+
+# To switch from branches
+git checkout branch-name
+
+# To see the difference btw the main and the given branch
+git diff branch-name 
+
+# To merge given branch to the main branch
+git merge branch-name
 git push origin main
