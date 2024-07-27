@@ -6,6 +6,7 @@ import random
 from datetime import datetime
 import mysql.connector
 
+# 3 major functions for init [1-Transfer Money,2-Deposit,3-Withdraw]
 print("""
 SELECT THE OPTIONS TO THEIR CORRESPONDING NUMBERS:
 1 - TRANSFER MONEY
@@ -13,8 +14,7 @@ SELECT THE OPTIONS TO THEIR CORRESPONDING NUMBERS:
 3 - WITHDRAW
       """)
 
-# 3 major functions for init
-
+# [1] Transfer money
 def trans_mon():
     print("""
 CHOOSE YOUR TRANSACTION METHODS:
@@ -25,19 +25,21 @@ CHOOSE YOUR TRANSACTION METHODS:
           """)
     init_trans()
 
-# 4 functions under transfer money
-
+# 4 functions under transfer money {1-UPI,2-NET BANKING,3-CREDIT/DEBIT CARDS,4-MOBILE WALLETS}
+# [1]{1} function of upi
 def upi():
     print("Transaction methods 1")
+# [1]{2} function of net banking
 def net_banking():
     print("Transaction methods 2")
+# [1]{3} function of cards transaction
 def cards_tran():
     print("Transaction methods 3")
+# [1]{4} functions of wallet
 def mob_wallet():
     print("Transaction methods 4")
 
 # init for transfer of money
-
 def init_trans():
     opt = int(input(">>> "))
     while opt in [1,2,3,4]:
@@ -56,6 +58,7 @@ def init_trans():
     else:
         print(" INCORRECT OPTION!\n TRY AGAIN")            
         init()
+### xxx ###
 
 def deposit():
     print("hello world2")
