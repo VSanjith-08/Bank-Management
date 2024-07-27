@@ -49,8 +49,6 @@ create and add file names to .gitignore file before adding the file to staging a
 git rm --cached -r file/folder-name
 git ls-files
 
-
-
 ###### ########## ######
 # To make a folder as repo
 # go to that folder and type the following:
