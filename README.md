@@ -40,7 +40,16 @@ git add the-name-of-file-deleted
 git commit -m "deleted filename file"
 git push origin main
 
-#
+# To view files in the staging area
+git ls-files
+
+# To ignore files going to staging area
+create and add file names to .gitignore file before adding the file to staging area
+# If it is already created and added to staging area use:
+git rm --cached -r file/folder-name
+git ls-files
+
+
 
 ###### ########## ######
 # To make a folder as repo
