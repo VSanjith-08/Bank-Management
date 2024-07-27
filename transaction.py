@@ -77,7 +77,7 @@ def init():
             withdraw()
             break
     else:
-        print(" INCORRECT OPTION!\n TRY AGAIN")            
+        print(" INCORRECT OPTION!\n TRY AGAIN!")            
         init()
 
 init()
