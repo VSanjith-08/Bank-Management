@@ -40,6 +40,8 @@ git add the-name-of-file-deleted
 git commit -m "deleted filename file"
 git push origin main
 
+#
+
 ###### ########## ######
 # To make a folder as repo
 # go to that folder and type the following:
