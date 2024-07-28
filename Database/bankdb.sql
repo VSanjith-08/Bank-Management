@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.37, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: localhost    Database: Bank_Management
+-- Host: localhost    Database: bank_management
 -- ------------------------------------------------------
--- Server version	8.0.37-0ubuntu0.22.04.3
+-- Server version	8.0.35
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Acc_statement`
+-- Table structure for table `acc_statement`
 --
 
-DROP TABLE IF EXISTS `Acc_statement`;
+DROP TABLE IF EXISTS `acc_statement`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Acc_statement` (
+CREATE TABLE `acc_statement` (
   `cu_name` varchar(30) NOT NULL,
   `upi_id` varchar(30) DEFAULT NULL,
   `acc_no` int NOT NULL,
@@ -33,13 +33,20 @@ CREATE TABLE `Acc_statement` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Acc_statement`
+-- Table structure for table `login_details`
 --
 
-LOCK TABLES `Acc_statement` WRITE;
-/*!40000 ALTER TABLE `Acc_statement` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Acc_statement` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `login_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `login_details` (
+  `firstname` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
+  `state` varchar(30) DEFAULT NULL,
+  `mobileno` int DEFAULT NULL,
+  `dob` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -50,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-28 14:04:26
+-- Dump completed on 2024-07-28 18:44:48
