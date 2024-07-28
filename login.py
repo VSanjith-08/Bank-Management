@@ -1,9 +1,13 @@
 # this is the login module
 
 import pandas as pd
-impoet mysql.connector
+import mysql.connector
 
-mydb = mysql.connector.connect
+mydb = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    passwd = "Sanjay@2000",
+    database = "Bank_Management"
 
 
 def signup():
