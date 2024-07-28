@@ -10,7 +10,9 @@ mydb = mysql.connector.connect(
     database = "Bank_Management"
 )
 
-mycursor = 
+mycursor = mydb.cursor()
+
+formula1 = import into login_details values
     
 
 
