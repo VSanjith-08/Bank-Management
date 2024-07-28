@@ -8,6 +8,10 @@ mydb = mysql.connector.connect(
     user = "root",
     passwd = "Sanjay@2000",
     database = "Bank_Management"
+)
+
+mycursor = 
+    
 
 
 def signup():
