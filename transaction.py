@@ -14,9 +14,6 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
-
-mycursor.execute("show tables")
-
 # 3 major functions for init [1-Transfer Money,2-Deposit,3-Withdraw]
 print("""
 SELECT THE OPTIONS TO THEIR CORRESPONDING NUMBERS:
@@ -39,7 +36,7 @@ CHOOSE YOUR TRANSACTION METHODS:
 # 4 functions under transfer money {1-UPI,2-NET BANKING,3-CREDIT/DEBIT CARDS,4-MOBILE WALLETS}
 # [1]{1} function of upi
 def upi():
-    upi_id_mob = input(">>> ENTER YOUR UPI ID/Mobile: ")
+    upi_id_mob = input(">>> ENTER YOUR UPI ID/MOBILE: ")
     for i in upi_id_mob:
         if i.isdigit():
             int_bool = True
