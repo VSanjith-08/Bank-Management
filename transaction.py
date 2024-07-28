@@ -14,6 +14,11 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
+formula1 = "import into "
+mycursor.execute(formula1)
+for i in mycursor:
+    print
+'''
 # 3 major functions for init [1-Transfer Money,2-Deposit,3-Withdraw]
 print("""
 SELECT THE OPTIONS TO THEIR CORRESPONDING NUMBERS:
@@ -100,5 +105,4 @@ def init_tm():
     else:
         print(" INCORRECT OPTION!\n TRY AGAIN!")            
         init_tm()
-
-init_tm()
+'''

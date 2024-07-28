@@ -18,14 +18,22 @@ THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
             email = input("ENTER YOUR MAIL-ID:\n>>> ")
             dob = input("ENTER YOUR DATE OF BIRTH:\n>>> ")
             mob = input("ENTER YOUR MOBILE NUMBER:\n>>> ")
+            a=3
             try:
                 mob = int(mob)
             except:
-                print('\nERROR: INCORRECT MOBILE NUMBER\nYOU HAVE ONLY 2 MORE ATTEMPTS')
-                mob = int(input("RE-ENTER YOUR MOBILE NUMBER:\n>>> "))
-            else:
-                print('\nERROR: ERROR: INCORRECT MOBILE NUMBER\nTHIS IS YOUR LAST ATTEMPT')
-                mob = int(input("RE-ENTER YOUR MOBILE NUMBER:\n>>> "))
+                a-=1
+            while a not in [-1,3]:
+                if a==0:
+                    create_acc()
+                else:
+                    try:
+                        mob = int(mob)
+                    except:
+                        print(f'\nERROR: INCORRECT MOBILE NUMBER\n\nYOU HAVE ONLY {a} MORE ATTEMPTS')
+                        mob = input("RE-ENTER YOUR MOBILE NUMBER:\n>>> ")
+                    a-=1
+
             global acc_deta
             acc_deta = (f_name,l_name,state,email,dob,mob)
             break
