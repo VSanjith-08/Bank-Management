@@ -12,7 +12,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-formula1 = import into login_details values
+formula1 = "import into login_details values()"
     
 
 
