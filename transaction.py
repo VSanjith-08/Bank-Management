@@ -6,6 +6,16 @@ import random
 from datetime import datetime
 import mysql.connector
 
+mydb = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    passwd = "sanjith"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("show tables")
+
 # 3 major functions for init [1-Transfer Money,2-Deposit,3-Withdraw]
 print("""
 SELECT THE OPTIONS TO THEIR CORRESPONDING NUMBERS:
@@ -28,7 +38,17 @@ CHOOSE YOUR TRANSACTION METHODS:
 # 4 functions under transfer money {1-UPI,2-NET BANKING,3-CREDIT/DEBIT CARDS,4-MOBILE WALLETS}
 # [1]{1} function of upi
 def upi():
-    print("Transaction methods 1")
+    upi_id_mob = input(">>> ENTER YOUR UPI ID/Mobile: ")
+    for i in upi_id_mob:
+        if i.isdigit():
+            int_bool = True
+        else:
+            int_bool = False
+            break
+    if int_bool:
+        upi_id_mob = int(upi_id_mob)
+    
+    
 # [1]{2} function of net banking
 def net_banking():
     print("Transaction methods 2")
@@ -57,7 +77,7 @@ def init_trans():
             break
     else:
         print(" INCORRECT OPTION!\n TRY AGAIN")            
-        init()
+        init_tm()
 ### xxx ###
 
 def deposit():
@@ -67,7 +87,7 @@ def withdraw():
 
 
 # Starting init
-def init():
+def init_tm():
     opt = int(input(">>> "))
     while opt in [1,2,3]:
         if opt == 1:
@@ -81,6 +101,6 @@ def init():
             break
     else:
         print(" INCORRECT OPTION!\n TRY AGAIN!")            
-        init()
+        init_tm()
 
-init()
+init_tm()
