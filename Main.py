@@ -5,6 +5,7 @@ import random
 from datetime import datetime
 import mysql.connector
 
+
 def create_acc():
     print("""
 THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
