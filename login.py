@@ -12,7 +12,9 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-formula1 = "import into login_details values()"
+formula1 = "import into login_details values(%s,%s,%s,%s,%s)"
+mycursor.execute(state,fname,lname,dob,mobile,user_info)
+mydb.commit()
     
 
 
