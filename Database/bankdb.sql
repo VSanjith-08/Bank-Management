@@ -55,7 +55,8 @@ CREATE TABLE `login_details` (
   `mobileno` char(10) NOT NULL,
   `dob` date DEFAULT NULL,
   `passwd` varchar(100) NOT NULL,
-  `gender` char(2) NOT NULL
+  `gender` char(2) NOT NULL,
+  `uid` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -65,7 +66,7 @@ CREATE TABLE `login_details` (
 
 LOCK TABLES `login_details` WRITE;
 /*!40000 ALTER TABLE `login_details` DISABLE KEYS */;
-INSERT INTO `login_details` VALUES ('V','SANJITH','tn','9445141604','2007-08-31','Sanjith123.','M'),('BALAJI','SANJAY','tn','6380809232','2007-06-21','Balaji123.','M'),('D','VALARMATHY','tn','9445141632','2002-01-11','Valarmathy123.','F');
+INSERT INTO `login_details` VALUES ('V','SANJITH','tn','9445141604','2007-08-31','Sanjith123.','M','VSANJITH678'),('BALAJI','SANJAY','tn','6380809232','2007-06-21','Balaji123.','M','BALAJISA123'),('D','VALARMATHY','tn','9444514164','2001-08-31','Va1.','F','dvalarm105');
 /*!40000 ALTER TABLE `login_details` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -78,4 +79,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-28 23:04:24
+-- Dump completed on 2024-07-29 20:42:41
