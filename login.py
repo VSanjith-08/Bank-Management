@@ -12,6 +12,25 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor()
 
+#Global varialbles.
+#in signup module
+'''
+lstatus
+mobile
+c_passwd
+gen_uid
+user_info
+ui
+'''
+
+# Status of the login
+def l_status():
+    global lstatus
+    lstatus = True
+    global ui
+    ui = 'VSANJITH678'
+
+#Signup module
 def signup():
     print("""
 \nTHIS IS SIGN UP PAGE
@@ -126,4 +145,3 @@ CHOOSE THE OPTION FROM THE FOLLOWING:
     else:
         print(" INCORRECT OPTION!\n TRY AGAIN!")            
         init_login()
-init_login()
