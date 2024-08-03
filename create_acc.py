@@ -4,6 +4,7 @@ import numpy as np
 import random
 from datetime import datetime
 import mysql.connector
+import os
 
 mydb = mysql.connector.connect(
     host = "localhost",
@@ -243,9 +244,12 @@ THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
             print('\nERROR: INCORRECT INPUT!\n')
             create_acc()
         print(df_acc_data,'\n')
-        print("-"*48)
-        print("x"*10,'ACCOUNT CREATION SUCCESSFUL!','x'*10)
-        print('-'*48,'\n')
+
+        ter_width = os.get_terminal_size().columns
+        print("="*ter_width)
+        center_width = int((ter_width-(len("ACCOUNT CREATION SUCCESSFUL")+2))/2)
+        print("x"*center_width,'ACCOUNT CREATION SUCCESSFUL','x'*center_width)
+        print('='*ter_width,'\n')
 
     create_acc2()
 

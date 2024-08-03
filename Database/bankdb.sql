@@ -41,7 +41,7 @@ CREATE TABLE `acc_statement` (
 
 LOCK TABLES `acc_statement` WRITE;
 /*!40000 ALTER TABLE `acc_statement` DISABLE KEYS */;
-INSERT INTO `acc_statement` VALUES ('V Sanjith','vsanjith2007@okjstbnk',3182007,'JSTBNK01','9445141655','2007-08-31 00:00:00','VSANJITH678','tn','2007-08-31');
+INSERT INTO `acc_statement` VALUES ('V Sanjith','vsanjith2007@okjstbnk',3182007,'JSTBNK01','9445141655','2007-08-31 00:00:00','VSANJITH678','tn','2007-08-31'),('balajisanjay','balajisanjay753@okjstbnk',5074131,'JSTBNK01','9887631087','2024-08-03 00:00:00','BALAJISA123','tn','2007-06-21'),('V SANJITH','sanjith.ind971@okjstbnk',5431392,'JSTBNK02','9444149729','2024-08-03 00:00:00','vsanjit926','tn','2008-08-31');
 /*!40000 ALTER TABLE `acc_statement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,7 +71,7 @@ CREATE TABLE `login_details` (
 
 LOCK TABLES `login_details` WRITE;
 /*!40000 ALTER TABLE `login_details` DISABLE KEYS */;
-INSERT INTO `login_details` VALUES ('BALAJI','SANJAY','tn','6380809232','2007-06-21','Balaji123.','M','BALAJISA123'),('D','VALARMATHY','tn','9444514164','2001-08-31','Va1.','F','dvalarm105'),('V','SANJITH','tn','9445141604','2007-08-31','Sanjith123.','M','VSANJITH678');
+INSERT INTO `login_details` VALUES ('BALAJI','SANJAY','tn','6380809232','2007-06-21','Balaji123.','M','BALAJISA123'),('D','VALARMATHY','tn','9444514164','2001-08-31','Va1.','F','dvalarm105'),('JOSEPH','VIJAY','tn','9775162922','1972-05-14','Joseph123.','M','josephv221'),('N','VIJAYAKUMAR','tn','9556514514','1992-02-26','Vijayakumar123.','M','nvijaya301'),('V','SANJITH','tn','9444149729','2008-08-31','Sanjith123.','M','vsanjit926'),('V','SANJITH','tn','9445141604','2007-08-31','Sanjith123.','M','VSANJITH678');
 /*!40000 ALTER TABLE `login_details` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -84,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-03 17:10:04
+-- Dump completed on 2024-08-03 23:36:36

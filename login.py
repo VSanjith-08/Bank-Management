@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import random
 import mysql.connector
+import os
 
 mydb = mysql.connector.connect(
     host = "localhost",
@@ -20,9 +21,11 @@ def l_status():
         if passwd_pass:
             lstatus = True
     if lstatus:
-        print("-"*40)
-        print("x"*10,'SIGN-IN SUCCESSFUL','x'*10)
-        print('-'*40,'\n')
+        ter_width = os.get_terminal_size().columns
+        print('\n'+"="*ter_width)
+        center_width = int((ter_width-(len("SIGN-IN SUCCESSFUL")+2))/2)
+        print("x"*center_width,'SIGN-IN SUCCESSFUL','x'*center_width)
+        print('='*ter_width,'\n')
     global final_uid
     final_uid = inp_uid
 
@@ -121,9 +124,11 @@ def signup():
     mycursor.execute(formula1,user_info)
     mydb.commit()
 
-    print("-"*40)
-    print("x"*10,'SIGN-UP SUCCESSFUL','x'*10)
-    print('-'*40,'\n')
+    ter_width = os.get_terminal_size().columns
+    print("="*ter_width)
+    center_width = int((ter_width-(len("SIGN-UP SUCCESSFUL")+2))/2)
+    print("x"*center_width,'SIGN-UP SUCCESSFUL','x'*center_width)
+    print('='*ter_width,'\n')
 
     def login_continue():
         log_continue = input("\nDO YOU WANT TO CONTINUE y/Y, TO ABORT n/N: ").lower()
