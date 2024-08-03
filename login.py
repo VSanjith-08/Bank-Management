@@ -1,5 +1,5 @@
 # this is the login module
-
+import numpy as np
 import pandas as pd
 import random
 import mysql.connector
@@ -12,47 +12,61 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor()
 
-#Global varialbles.
-#in signup module
-'''
-lstatus
-mobile
-c_passwd
-gen_uid
-user_info
-ui
-'''
-
 # Status of the login
 def l_status():
     global lstatus
-    lstatus = True
-    global ui
-    ui = 'VSANJITH678'
+    lstatus = False
+    if uid_pass:
+        if passwd_pass:
+            lstatus = True
+    if lstatus:
+        print("-"*40)
+        print("x"*10,'SIGN-IN SUCCESSFUL','x'*10)
+        print('-'*40,'\n')
+    global final_uid
+    final_uid = inp_uid
 
 #Signup module
 def signup():
     print("""
-\nTHIS IS SIGN UP PAGE
+\nTHIS IS SIGN-UP PAGE
 """)
     fname = input("FIRSTNAME : ").upper()
     lname = input("LASTNAME: ").upper()
     state = input("STATE CODE (Eg: tn,ka,kl,etc): ").lower()
     gender = input("GENDER: ").upper()
     dob = input("DATE OF BIRTH (yyyy-mm-dd) : ")
-    def mob_le():
-        global mobile
-        mobile = input("MOBILE NUMBER : ")
-        a=0
-        for i in mobile:
-            if i.isdigit()==False:
-                print("\nERROR: RE-ENTER YOU'RE MOBILE NUMBER\n")
-                mob_le()
-            a+=1
-        if a!=10:
-            print("\nERROR: RE-ENTER YOU'RE MOBILE NUMBER\n")
-            mob_le()
-    mob_le()
+    mob = input("MOBILE NUMBER: ")
+    # Checking is all the given characters in mobile number is a digit and of 10 digits
+    a = 2
+    while a != 0:
+        def chk():
+            print(f'\nERROR: INCORRECT MOBILE NUMBER\n\nYOU HAVE ONLY {a} MORE ATTEMPTS')
+            global mob
+            mob = input("RE-ENTER YOUR MOBILE NUMBER:\n>>> ")
+                        
+        if len(mob) == 10:
+            for i in mob:
+                if i.isalpha():
+                    chk()
+                    break
+                else:
+                    a = 1
+                    break
+        else:
+            chk()
+        a-=1
+
+        # If all the 3 chances are over for re-writing the mobile number
+    if len(mob) == 10:
+        for i in mob:
+            if i.isalpha():
+                quit()
+            else:
+                break
+    else:
+        quit()
+        
     def passwd():
         n_passwd = input("PASSWORD: ")
         caps,small,digit,space,spc = False,False,False,False,False
@@ -101,12 +115,22 @@ def signup():
     print(f"\n##### YOU'RE NEWLY CREATED USER ID: {gen_uid} #####")
     print(f"\n##### PASSWORD: {c_passwd} #####\n")
     global user_info
-    user_info=(fname,lname,state,mobile,dob,c_passwd,gender,gen_uid)
+    user_info=(fname,lname,state,mob,dob,c_passwd,gender,gen_uid)
+
+    formula1 = "insert into login_details (firstname,lastname,state,mobileno,dob,passwd,gender,uid) values (%s,%s,%s,%s,%s,%s,%s,%s)"
+    mycursor.execute(formula1,user_info)
+    mydb.commit()
+
+    print("-"*40)
+    print("x"*10,'SIGN-UP SUCCESSFUL','x'*10)
+    print('-'*40,'\n')
+
     def login_continue():
         log_continue = input("\nDO YOU WANT TO CONTINUE y/Y, TO ABORT n/N: ").lower()
         if log_continue in ['y','n']:
             if log_continue == 'y':
                 signin()
+                l_status()
             elif log_continue == 'n':
                 quit()
         else:
@@ -114,14 +138,68 @@ def signup():
             login_continue()
     login_continue()
 
-    formula1 = "insert into login_details (firstname,lastname,state,mobileno,dob,passwd,gender,uid) values (%s,%s,%s,%s,%s,%s,%s,%s)"
-    mycursor.execute(formula1,user_info)
-    mydb.commit()
+    
 
 def signin():
-    print("signin")
+    print("""
+THIS IS SIGN-IN PAGE
+""")
+    
+    formula = f"select uid from login_details"
+    mycursor.execute(formula)
+    retrived_uid = mycursor.fetchall()
+
+    arr_retrived_uid = np.array([])
+    for i in retrived_uid:
+        arr_retrived_uid = np.concatenate((arr_retrived_uid,np.array([i[0]])))
+    
+    formula1 = f"select passwd from login_details"
+    mycursor.execute(formula1)
+    retrived_passwd = mycursor.fetchall()
+    
+    arr_retrived_passwd = np.array([])
+    for i in retrived_passwd:
+        arr_retrived_passwd = np.concatenate((arr_retrived_passwd,np.array([i[0]])))
+    global uid_pass
+    uid_pass = False
+    global passwd_pass
+    passwd_pass = False
+
+    global inp_uid
+    inp_uid = input("UID: ")
+    if inp_uid in arr_retrived_uid:
+        uid_pass = True
+    else:
+        i = 2
+        while uid_pass == False:
+            if i != 0:
+                print('\n### ERROR: INCORRECT UID ###')
+                inp_uid = input(f"YOU HAVE {i} MORE CHANCE\n\nRE-ENTER UID: ")
+                if inp_uid in arr_retrived_uid:
+                    uid_pass = True
+            else:
+                print("\n### ####### ###\nYOU'RE GIVEN INPUTS ARE OVER\n\nTHANK YOU!\n")
+                quit()
+            i-=1
+    print()
+    inp_passwd = input("PASSWORD: ")
+    if inp_passwd in arr_retrived_passwd:
+        passwd_pass = True
+    else:
+        i = 2
+        while passwd_pass == False:
+            if i != 0:
+                print('\n### ERROR: INCORRECT PASSWORD ###')
+                inp_passwd = input(f"YOU HAVE {i} MORE CHANCE\n\nRE-ENTER PASSWORD: ")
+                if inp_passwd in arr_retrived_passwd:
+                    passwd_pass = True
+            else:
+                print("\n### ####### ###\nYOU'RE GIVEN INPUTS ARE OVER\n\nTHANK YOU!\n")
+                quit()
+            i-=1
+
 def admin():
-    print("admin")
+    print("this is admin module")
 
 #starting init
 def init_login():
@@ -138,6 +216,7 @@ CHOOSE THE OPTION FROM THE FOLLOWING:
             break
         elif opt == 1:
             signin()
+            l_status()
             break
         elif opt == 3:
             admin()

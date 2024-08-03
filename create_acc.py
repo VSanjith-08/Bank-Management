@@ -20,10 +20,14 @@ THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
 """)
     # A new function to ignore the above print statement
     def create_acc2():
+        import login
+        formula3 = f"select mobileno,firstname,lastname,dob from login_details where uid = '{login.final_uid}'"
+        mycursor.execute(formula3)
+        myresult1 = mycursor.fetchall()
         con = input(">>> ").lower()
         if con in ['y','n']:
             if con == 'y':
-                name = input("Full-NAME: ").lower()
+                name = str((myresult1[0][1]+" "+myresult1[0][2]))
                 state = input("STATE CODE (Eg: tn,ka,kl,etc): ").lower()
                 emai = input("MAIL-ID: ").lower()
 
@@ -41,29 +45,8 @@ THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
                             chkforat = True
                             break
                     
-                dob = input("DATE OF BIRTH: ")
-
-                mob = input("MOBILE NUMBER: ")
-
-                # Checking is all the given characters in mobile number is a digit and of 10 digits
-                a = 2
-                while a != 0:
-                    def chk():
-                        print(f'\nERROR: INCORRECT MOBILE NUMBER\n\nYOU HAVE ONLY {a} MORE ATTEMPTS')
-                        global mob
-                        mob = input("RE-ENTER YOUR MOBILE NUMBER:\n>>> ")
-                        
-                    if len(mob) == 10:
-                        for i in mob:
-                            if i.isalpha():
-                                chk()
-                                break
-                            else:
-                                a = 1
-                                break
-                    else:
-                        chk()
-                    a-=1
+                dob = myresult1[0][3]
+                mob = str(myresult1[0][0])
 
                 # If all the 3 chances are over for re-writing the mobile number
                 if len(mob) == 10:
@@ -115,6 +98,7 @@ THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
                 # Function to generate IFSC code
                 def ifsc_gen():
                     formula = "select ifsc from acc_statement"
+                    # dictionary of branches of our bank
                     dict_state = {
                         "ap": pd.Series(["Visakhapatnam", "Vijayawada"]),
                         "ar": pd.Series(["Itanagar", "Tawang"]),
@@ -227,10 +211,21 @@ THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
                     gen_ifsc = dict_branch[access_state[bnk_branch-1]]
 
                 ifsc_gen()
-                                            
-                global acc_deta
-                acc_deta = (name,gen_upi,gen_accno,gen_ifsc,mob,gen_date,state,dob)
 
+                import login                         
+                global acc_deta
+                acc_deta = (name,gen_upi,gen_accno,gen_ifsc,mob,gen_date,login.final_uid,state,dob)
+                acc_data = {"NAME":name,
+                            'UPI ID':gen_upi,
+                            'ACCOUNT NUMBER':gen_accno,
+                            'IFSC CODE':gen_ifsc,
+                            'ACCOUNT CREATED ON':gen_date
+                            }
+                global df_acc_data
+                df_acc_data = pd.DataFrame([acc_data],index = [login.final_uid])
+                formula1 = "insert into acc_statement (cu_name,upi_id,acc_no,ifsc,mobile_no,Date_of_opening,uid,state,dob) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                mycursor.execute(formula1,acc_deta)
+                mydb.commit()
             elif con == "n":
                 def confirmation():
                     print("DO YOU WANT TO PROCEED y/Y - CONTINUE, OR n/N - TO REVERT")
@@ -247,23 +242,17 @@ THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
         else:
             print('\nERROR: INCORRECT INPUT!\n')
             create_acc()
-        print(acc_deta)
+        print(df_acc_data,'\n')
+        print("-"*48)
+        print("x"*10,'ACCOUNT CREATION SUCCESSFUL!','x'*10)
+        print('-'*48,'\n')
 
     create_acc2()
 
 def init_create_acc():
-    uid = 'dasda12'
     import login
-    login.l_status()
-    ui = 'BALAJISA123'
-
-    formula = f"select state,dob from login_details where uid = '{ui}'" 
-    mycursor.execute(formula)
-    retrived_sta_dob = mycursor.fetchall()
-    retrived_state = retrived_sta_dob[0][0]
-    retrived_dob = retrived_sta_dob[0][1]
-
-    formula2 = f"select uid from acc_statement where state = '{retrived_state}' and dob = '{retrived_dob}'"
+    ui = login.final_uid
+    formula2 = f"select uid from acc_statement where uid = '{ui}'"
     mycursor.execute(formula2)
     retrived_uid  = mycursor.fetchall()
     if login.lstatus:
@@ -274,5 +263,3 @@ def init_create_acc():
                 pass
         else:
             create_acc()
-
-init_create_acc()
