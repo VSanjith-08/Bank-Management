@@ -21,11 +21,12 @@ def l_status():
         if passwd_pass:
             lstatus = True
     if lstatus:
-        ter_width = os.get_terminal_size().columns
-        print('\n'+"="*ter_width)
-        center_width = int((ter_width-(len("SIGN-IN SUCCESSFUL")+2))/2)
-        print("x"*center_width,'SIGN-IN SUCCESSFUL','x'*center_width)
-        print('='*ter_width,'\n')
+        print("\n"+"-"*30)
+        print("+++++",end="")
+        print("\033[1;20;33m SIGN-IN SUCCESSFUL \033[0m",end="")
+        print("+++++")
+        print("-"*30)
+        
     global final_uid
     final_uid = inp_uid
 
@@ -45,8 +46,8 @@ def signup():
     while a != 0:
         def chk():
             print(f'\nERROR: INCORRECT MOBILE NUMBER\n\nYOU HAVE ONLY {a} MORE ATTEMPTS')
-            global mob
-            mob = input("RE-ENTER YOUR MOBILE NUMBER:\n>>> ")
+            global mo
+            mo = input("RE-ENTER YOUR MOBILE NUMBER:\n>>> ")
                         
         if len(mob) == 10:
             for i in mob:
@@ -58,6 +59,7 @@ def signup():
                     break
         else:
             chk()
+            mob = mo
         a-=1
 
         # If all the 3 chances are over for re-writing the mobile number
@@ -85,7 +87,9 @@ def signup():
             if [i.isdigit(),i.isalpha(),i.isspace()] == [False,False,False]:
                 spc = True
         if [caps,small,digit,space,spc] != [True,True,True,False,True]:
-            print("\nWRONG INPUT!\nYOUR PASSWORD SHOULD HAVE ATLEAST ONE CAPITAL,SMALL,DIGIT AND NO SPACE.\n")
+            
+            print("\033[1;20;31m\nERROR: WRONG INPUT!\033[0m")
+            print("\033[1;20;31mYOUR PASSWORD SHOULD HAVE ATLEAST ONE CAPITAL,SMALL,DIGIT AND NO SPACE.\n\033[0m")
             passwd()
         global c_passwd
         c_passwd = input("REPEAT PASSWORD: ")
@@ -124,11 +128,11 @@ def signup():
     mycursor.execute(formula1,user_info)
     mydb.commit()
 
-    ter_width = os.get_terminal_size().columns
-    print("="*ter_width)
-    center_width = int((ter_width-(len("SIGN-UP SUCCESSFUL")+2))/2)
-    print("x"*center_width,'SIGN-UP SUCCESSFUL','x'*center_width)
-    print('='*ter_width,'\n')
+    print("\n"+"-"*30)
+    print("+++++",end="")
+    print("\033[1;20;33m SIGN-UP SUCCESSFUL \033[0m",end="")
+    print("+++++")
+    print("-"*30)
 
     def login_continue():
         log_continue = input("\nDO YOU WANT TO CONTINUE y/Y, TO ABORT n/N: ").lower()
@@ -178,7 +182,7 @@ THIS IS SIGN-IN PAGE
         i = 2
         while uid_pass == False:
             if i != 0:
-                print('\n### ERROR: INCORRECT UID ###')
+                print("\033[1;20;31m\n### ERROR: INCORRECT UID ###\033[0m")
                 inp_uid = input(f"YOU HAVE {i} MORE CHANCE\n\nRE-ENTER UID: ")
                 if inp_uid in arr_retrived_uid:
                     uid_pass = True
@@ -194,7 +198,7 @@ THIS IS SIGN-IN PAGE
         i = 2
         while passwd_pass == False:
             if i != 0:
-                print('\n### ERROR: INCORRECT PASSWORD ###')
+                print("\033[1;20;31m\n### ERROR: INCORRECT PASSWORD ###\033[0m")
                 inp_passwd = input(f"YOU HAVE {i} MORE CHANCE\n\nRE-ENTER PASSWORD: ")
                 if inp_passwd in arr_retrived_passwd:
                     passwd_pass = True

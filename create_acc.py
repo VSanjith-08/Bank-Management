@@ -16,13 +16,18 @@ mycursor = mydb.cursor()
 
 
 def create_acc():
+    ter_width = os.get_terminal_size().columns
+    print('\n'+"_"*ter_width+'\n')
+    center_width = int((ter_width-(len("THIS IS ACCOUNT CREATION PAGE")+4))/2)
+    print(" "*center_width+"|",'THIS IS ACCOUNT CREATION PAGE',"|"+' '*center_width)
+    print('_'*ter_width,'\n')
     print("""
-THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
+TO PROCEED TYPE y/Y, OR TO QUIT TYPE n/N
 """)
     # A new function to ignore the above print statement
     def create_acc2():
         import login
-        formula3 = f"select mobileno,firstname,lastname,dob from login_details where uid = '{login.final_uid}'"
+        formula3 = f"select mobileno,firstname,lastname,dob,gender from login_details where uid = '{login.final_uid}'"
         mycursor.execute(formula3)
         myresult1 = mycursor.fetchall()
         con = input(">>> ").lower()
@@ -48,7 +53,7 @@ THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
                     
                 dob = myresult1[0][3]
                 mob = str(myresult1[0][0])
-
+                gender = str(myresult1[0][4])
                 # If all the 3 chances are over for re-writing the mobile number
                 if len(mob) == 10:
                     for i in mob:
@@ -215,7 +220,7 @@ THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
 
                 import login                         
                 global acc_deta
-                acc_deta = (name,gen_upi,gen_accno,gen_ifsc,mob,gen_date,login.final_uid,state,dob)
+                acc_deta = (name,gen_upi,gen_accno,gen_ifsc,mob,gen_date,login.final_uid,state,dob,gender)
                 acc_data = {"NAME":name,
                             'UPI ID':gen_upi,
                             'ACCOUNT NUMBER':gen_accno,
@@ -224,7 +229,7 @@ THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
                             }
                 global df_acc_data
                 df_acc_data = pd.DataFrame([acc_data],index = [login.final_uid])
-                formula1 = "insert into acc_statement (cu_name,upi_id,acc_no,ifsc,mobile_no,Date_of_opening,uid,state,dob) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                formula1 = "insert into acc_statement (cu_name,upi_id,acc_no,ifsc,mobile_no,Date_of_opening,uid,state,dob,gender) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                 mycursor.execute(formula1,acc_deta)
                 mydb.commit()
             elif con == "n":
@@ -245,11 +250,11 @@ THIS IS ACCOUNT CREATION PAGE TO PROCEED TYPE y/Y, OR TO SKIP TYPE n/N
             create_acc()
         print(df_acc_data,'\n')
 
-        ter_width = os.get_terminal_size().columns
-        print("="*ter_width)
-        center_width = int((ter_width-(len("ACCOUNT CREATION SUCCESSFUL")+2))/2)
-        print("x"*center_width,'ACCOUNT CREATION SUCCESSFUL','x'*center_width)
-        print('='*ter_width,'\n')
+        print("\n"+"-"*39)
+        print("+++++",end="")
+        print("\033[1;20;33m ACCOUNT CREATION SUCCESSFUL \033[0m",end="")
+        print("+++++")
+        print("-"*39)
 
     create_acc2()
 
@@ -265,5 +270,5 @@ def init_create_acc():
                 create_acc()
             else:
                 pass
-        else:
+        elif len(retrived_uid)==0:
             create_acc()
