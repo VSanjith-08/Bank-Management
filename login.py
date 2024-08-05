@@ -21,11 +21,13 @@ def l_status():
         if passwd_pass:
             lstatus = True
     if lstatus:
-        print("\n"+"-"*30)
+        print("\n"+"-"*34)
         print("+++++",end="")
-        print("\033[1;20;33m SIGN-IN SUCCESSFUL \033[0m",end="")
+        print("\033[1;20;33m SUCCESSFULLY SIGNED-IN \033[0m",end="")
         print("+++++")
-        print("-"*30)
+        print("-"*34)
+        terminal_width = os.get_terminal_size().columns
+        print("_"*terminal_width,"\n")
         
     global final_uid
     final_uid = inp_uid
@@ -38,38 +40,6 @@ def signup():
     fname = input("FIRSTNAME : ").upper()
     lname = input("LASTNAME: ").upper()
     gender = input("GENDER: ").upper()
-    mob = input("MOBILE NUMBER: ")
-    # Checking is all the given characters in mobile number is a digit and of 10 digits
-    a = 2
-    while a != 0:
-        def chk():
-            print("\033[1;20;31m\nERROR: INCORRECT MOBILE NUMBER\033[0m")
-            print("\033[1;20;31m\nYOU HAVE ONLY\033[0m",f'\033[1;20;33m{a}\033[0m','\033[1;20;31mMORE ATTEMPTS\033[0m')
-            global mo
-            mo = input("RE-ENTER YOUR MOBILE NUMBER:\n>>> ")
-                        
-        if len(mob) == 10:
-            for i in mob:
-                if i.isalpha():
-                    chk()
-                    break
-                else:
-                    a = 1
-                    break
-        else:
-            chk()
-            mob = mo
-        a-=1
-
-        # If all the 3 chances are over for re-writing the mobile number
-    if len(mob) == 10:
-        for i in mob:
-            if i.isalpha():
-                quit()
-            else:
-                break
-    else:
-        quit()
         
     def passwd():
         global n_passwd
@@ -106,27 +76,46 @@ def signup():
         formula = "select uid from login_details"
         mycursor.execute(formula)
         myresult = mycursor.fetchall()
-        def gen_uiid():
-            global gen_uid
-            ct = len(fname+lname)
-            global gen_uid
-            if ct >= 7:
-                nam = (fname+lname)[:7]
-                gen_uid = (nam+str(random.randint(100,999))).lower()
-            else:
-                nam = fname+lname
-                gen_uid = (nam+str(random.randint(100,999))).lower()
-        gen_uiid()
-        for i in myresult:
-            if i[0] == gen_uid:
-                gen_uiid()
-    uid()
-    print("\033[1;20;34m\n##### YOU'RE NEWLY CREATED USER ID:#####\033[0m",f"\033[1;20;33m{gen_uid}\033[0m,\033[1;20;34m#####\033[0m")
-    print("\033[1;20;34m\n##### PASSWORD:\033[0m",f"\033[1;20;33m{c_passwd}\033[0m","\033[1;20;34m#####\n\033[0m")
-    global user_info
-    user_info=(fname,lname,mob,c_passwd,gender,gen_uid)
+        def generation_uid():
+            global inp_uid
+            inp_uid = input("USER ID: ")
+            cont = True
+            for i in myresult:
+                if i[0] == inp_uid:
+                    cont = False
+            if cont == False:
 
-    formula1 = "insert into login_details (firstname,lastname,mobileno,passwd,gender,uid) values (%s,%s,%s,%s,%s,%s)"
+                def gen_uiid():
+                    global gn_uid
+                    ct = len(fname+lname)
+                    global gn_uid
+                    if ct >= 7:
+                        nam = (fname+lname)[:7]
+                        gn_uid = (nam+str(random.randint(100,999))).lower()
+                    else:
+                        nam = fname+lname
+                        gn_uid = (nam+str(random.randint(100,999))).lower()
+                gen_uiid()
+                for i in myresult:
+                    if i[0] == gn_uid:
+                        gen_uiid()
+
+                print("\033[1;20;31m\nERROR: USER ID ALREADY IN USE, TRY AGAIN\033[0m")
+                print("SUGGESTED USER IDS:  ",end="")
+                for i in range(3):
+                    gen_uiid()
+                    print(gn_uid,end=" ")
+                print("\n")
+                generation_uid()
+        generation_uid()
+        
+    uid()
+    print("\033[1;20;34m\n##### YOU'RE NEWLY CREATED USER ID:#####\033[0m",f"\033[1;20;33m{inp_uid}\033[0m,\033[1;20;34m#####\033[0m")
+    print("\033[1;20;34m\n##### PASSWORD:\033[0m",f"\033[1;20;33m{c_passwd}\033[0m"+"\033[1;20;34m #####\n\033[0m")
+    global user_info
+    user_info=(fname,lname,c_passwd,gender,inp_uid)
+
+    formula1 = "insert into login_details (firstname,lastname,passwd,gender,uid) values (%s,%s,%s,%s,%s)"
     mycursor.execute(formula1,user_info)
     mydb.commit()
 
@@ -135,8 +124,14 @@ def signup():
     print("\033[1;20;33m SIGN-UP SUCCESSFUL \033[0m",end="")
     print("+++++")
     print("-"*30)
+    terminal_width = os.get_terminal_size().columns
+    print("_"*terminal_width,"\n")
 
     def login_continue():
+        print("\n"+"\033[1;20;92m=\033[0m"*30)
+        print("\033[1;20;92m|::: THIS IS SIGN-IN PAGE :::|\033[0m")
+        print("\033[1;20;92m=\033[0m"*30,"\n")
+
         log_continue = input("\nDO YOU WANT TO CONTINUE y/Y, TO ABORT n/N: ").lower()
         if log_continue in ['y','n']:
             if log_continue == 'y':
@@ -152,10 +147,6 @@ def signup():
     
 
 def signin():
-    print("\n"+"\033[1;20;33m=\033[0m"*30)
-    print("\033[1;20;33m|::: THIS IS SIGN-IN PAGE :::|\033[0m")
-    print("\033[1;20;33m=\033[0m"*30,"\n")
-    
     formula = f"select uid from login_details"
     mycursor.execute(formula)
     retrived_uid = mycursor.fetchall()
