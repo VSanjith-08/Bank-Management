@@ -27,7 +27,7 @@ TO PROCEED TYPE y/Y, OR TO QUIT TYPE n/N
     # A new function to ignore the above print statement
     def create_acc2():
         import login
-        formula3 = f"select mobileno,firstname,lastname,dob,gender from login_details where uid = '{login.final_uid}'"
+        formula3 = f"select mobileno,firstname,lastname,gender from login_details where uid = '{login.final_uid}'"
         mycursor.execute(formula3)
         myresult1 = mycursor.fetchall()
         con = input(">>> ").lower()
@@ -44,14 +44,13 @@ TO PROCEED TYPE y/Y, OR TO QUIT TYPE n/N
                         chkforat = True
                         break
                 while chkforat == False:
-                    print("\nERROR: INCORRECT EMAIL\n")
+                    print("\033[1;20;31m\n##### ERROR: INCORRECT EMAIL #####\n\033[0m")
                     emai = input("mailid: ")
                     for i in emai:
                         if i == '@':
                             chkforat = True
                             break
-                    
-                dob = myresult1[0][3]
+                dob = input("DATE OF BIRTH (yyyy-mm-dd) : ")
                 mob = str(myresult1[0][0])
                 gender = str(myresult1[0][4])
                 # If all the 3 chances are over for re-writing the mobile number
@@ -242,11 +241,11 @@ TO PROCEED TYPE y/Y, OR TO QUIT TYPE n/N
                         elif con1 == 'n':
                             create_acc()
                     else:
-                        print("\nERROR: INCORRECT INPUT!\n")
+                        print("\033[1;20;31m\n##### ERROR: INCORRECT INPUT! #####\n\033[0m")
                         confirmation()
                 confirmation()
         else:
-            print('\nERROR: INCORRECT INPUT!\n')
+            print("\033[1;20;31m\n##### ERROR: INCORRECT INPUT! #####\n\033[0m")
             create_acc()
         print(df_acc_data,'\n')
 

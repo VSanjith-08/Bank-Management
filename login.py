@@ -32,20 +32,19 @@ def l_status():
 
 #Signup module
 def signup():
-    print("""
-\nTHIS IS SIGN-UP PAGE
-""")
+    print("\n"+"\033[1;20;33m=\033[0m"*30)
+    print("\033[1;20;33m|::: THIS IS SIGN-UP PAGE :::|\033[0m")
+    print("\033[1;20;33m=\033[0m"*30,"\n")
     fname = input("FIRSTNAME : ").upper()
     lname = input("LASTNAME: ").upper()
-    state = input("STATE CODE (Eg: tn,ka,kl,etc): ").lower()
     gender = input("GENDER: ").upper()
-    dob = input("DATE OF BIRTH (yyyy-mm-dd) : ")
     mob = input("MOBILE NUMBER: ")
     # Checking is all the given characters in mobile number is a digit and of 10 digits
     a = 2
     while a != 0:
         def chk():
-            print(f'\nERROR: INCORRECT MOBILE NUMBER\n\nYOU HAVE ONLY {a} MORE ATTEMPTS')
+            print("\033[1;20;31m\nERROR: INCORRECT MOBILE NUMBER\033[0m")
+            print("\033[1;20;31m\nYOU HAVE ONLY\033[0m",f'\033[1;20;33m{a}\033[0m','\033[1;20;31mMORE ATTEMPTS\033[0m')
             global mo
             mo = input("RE-ENTER YOUR MOBILE NUMBER:\n>>> ")
                         
@@ -73,6 +72,7 @@ def signup():
         quit()
         
     def passwd():
+        global n_passwd
         n_passwd = input("PASSWORD: ")
         caps,small,digit,space,spc = False,False,False,False,False
         for i in n_passwd:
@@ -89,17 +89,19 @@ def signup():
         if [caps,small,digit,space,spc] != [True,True,True,False,True]:
             
             print("\033[1;20;31m\nERROR: WRONG INPUT!\033[0m")
-            print("\033[1;20;31mYOUR PASSWORD SHOULD HAVE ATLEAST ONE CAPITAL,SMALL,DIGIT AND NO SPACE.\n\033[0m")
+            print("\033[1;20;31mYOUR PASSWORD SHOULD HAVE ATLEAST ONE CAPITAL,SMALL,DIGIT,SPACE AND SPECIAL-CHARACTER.\n\033[0m")
             passwd()
+        else:
+            repeat()
+    def repeat():
         global c_passwd
         c_passwd = input("REPEAT PASSWORD: ")
-        if n_passwd == c_passwd:
-            pass
-        else:
-            print("\nERROR: PASSWORDS DOES NOT MATCH\n")
+        while n_passwd != c_passwd:
+            print("\033[1;20;31m\nERROR: PASSWORDS DOES NOT MATCH\n\033[0m")
             passwd()
-
+            break
     passwd()
+
     def uid():
         formula = "select uid from login_details"
         mycursor.execute(formula)
@@ -119,12 +121,12 @@ def signup():
             if i[0] == gen_uid:
                 gen_uiid()
     uid()
-    print(f"\n##### YOU'RE NEWLY CREATED USER ID: {gen_uid} #####")
-    print(f"\n##### PASSWORD: {c_passwd} #####\n")
+    print("\033[1;20;34m\n##### YOU'RE NEWLY CREATED USER ID:#####\033[0m",f"\033[1;20;33m{gen_uid}\033[0m,\033[1;20;34m#####\033[0m")
+    print("\033[1;20;34m\n##### PASSWORD:\033[0m",f"\033[1;20;33m{c_passwd}\033[0m","\033[1;20;34m#####\n\033[0m")
     global user_info
-    user_info=(fname,lname,state,mob,dob,c_passwd,gender,gen_uid)
+    user_info=(fname,lname,mob,c_passwd,gender,gen_uid)
 
-    formula1 = "insert into login_details (firstname,lastname,state,mobileno,dob,passwd,gender,uid) values (%s,%s,%s,%s,%s,%s,%s,%s)"
+    formula1 = "insert into login_details (firstname,lastname,mobileno,passwd,gender,uid) values (%s,%s,%s,%s,%s,%s)"
     mycursor.execute(formula1,user_info)
     mydb.commit()
 
@@ -150,9 +152,9 @@ def signup():
     
 
 def signin():
-    print("""
-THIS IS SIGN-IN PAGE
-""")
+    print("\n"+"\033[1;20;33m=\033[0m"*30)
+    print("\033[1;20;33m|::: THIS IS SIGN-IN PAGE :::|\033[0m")
+    print("\033[1;20;33m=\033[0m"*30,"\n")
     
     formula = f"select uid from login_details"
     mycursor.execute(formula)
@@ -187,9 +189,10 @@ THIS IS SIGN-IN PAGE
                 if inp_uid in arr_retrived_uid:
                     uid_pass = True
             else:
-                print("\n### ####### ###\nYOU'RE GIVEN INPUTS ARE OVER\n\nTHANK YOU!\n")
+                print("\033[1;20;33m\n### ####### ###\nYOU'RE GIVEN INPUTS ARE OVER\n\nTHANK YOU!\n\033[0m")
                 quit()
             i-=1
+
     print()
     inp_passwd = input("PASSWORD: ")
     if inp_passwd in arr_retrived_passwd:
@@ -203,7 +206,7 @@ THIS IS SIGN-IN PAGE
                 if inp_passwd in arr_retrived_passwd:
                     passwd_pass = True
             else:
-                print("\n### ####### ###\nYOU'RE GIVEN INPUTS ARE OVER\n\nTHANK YOU!\n")
+                print("\033[1;20;33m\n### ####### ###\nYOU'RE GIVEN INPUTS ARE OVER\n\nTHANK YOU!\n\033[0m")
                 quit()
             i-=1
 
@@ -231,5 +234,5 @@ CHOOSE THE OPTION FROM THE FOLLOWING:
             admin()
             break
     else:
-        print(" INCORRECT OPTION!\n TRY AGAIN!")            
+        print("\033[1;20;31m\nERROR: WRONG INPUT!\nTRYAGAIN!\033[0m")         
         init_login()
