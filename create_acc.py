@@ -14,19 +14,74 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor()
 
-
 def create_acc():
+    print()
     print("\033[1;20;96m=\033[0m"*40)
     print("\033[1;20;96m|::: THIS IS ACCOUNT CREATION PAGE :::|\033[0m")
     print("\033[1;20;96m=\033[0m"*40,"\n")
     # A new function to ignore the above print statement
+    name = input("FULL NAME: ").upper()
+    gender = input("GENDER: ").upper()
+        
+    def passwd():
+        global n_passwd
+        n_passwd = input("PASSWORD: ")
+        caps,small,digit,space,spc = False,False,False,False,False
+        for i in n_passwd:
+            if i.isupper():
+                caps = True
+            if i.islower():
+                small = True
+            if i.isspace():
+                space = True
+            if i.isdigit():
+                digit = True
+            if [i.isdigit(),i.isalpha(),i.isspace()] == [False,False,False]:
+                spc = True
+        if [caps,small,digit,space,spc] != [True,True,True,False,True]:
+            
+            print("\033[1;20;31m\nERROR: WRONG INPUT!\033[0m")
+            print("\033[1;20;31mYOUR PASSWORD SHOULD HAVE ATLEAST ONE CAPITAL,SMALL,DIGIT,SPACE AND SPECIAL-CHARACTER.\n\033[0m")
+            passwd()
+        else:
+            repeat()
+    def repeat():
+        global c_passwd
+        c_passwd = input("REPEAT PASSWORD: ")
+        while n_passwd != c_passwd:
+            print("\033[1;20;31m\nERROR: PASSWORDS DOES NOT MATCH\n\033[0m")
+            passwd()
+            break
+    passwd()
+
+    def uid():
+        formula = "select uid from login_details"
+        mycursor.execute(formula)
+        myresult = mycursor.fetchall()
+
+        def gen_uiid():
+            name_ws = ""
+            for i in name:
+                if i.isalpha():
+                    name_ws += i
+
+            global gn_uid
+            ct = len(name_ws)
+            if ct >= 7:
+                nam = (name_ws)[:7]
+                gn_uid = (nam+str(random.randint(100,999))).upper()
+            else:
+                gn_uid = (name_ws+str(random.randint(100,999))).upper()
+        gen_uiid()
+        for i in myresult:
+            if i[0] == gn_uid:
+                gen_uiid()
+    uid()
+
+    user_info=(name,c_passwd,gender,gn_uid)
+
     def create_acc2():
-        import login
-        formula3 = f"select firstname,lastname,gender from login_details where uid = '{login.final_uid}'"
-        mycursor.execute(formula3)
-        myresult1 = mycursor.fetchall()
         if True:
-            name = str((myresult1[0][0]+" "+myresult1[0][1]))
             state = input("STATE CODE (Eg: tn,ka,kl,etc): ").lower()
             emai = input("MAIL-ID: ").lower()
 
@@ -44,56 +99,11 @@ def create_acc():
                         chkforat = True
                         break
             dob = input("DATE OF BIRTH (yyyy-mm-dd) : ")
-            mob = input("MOBILE NUMBER: ")
-            # Checking is all the given characters in mobile number is a digit and of 10 digits
-            a = 2
-            while a != 0:
-                def chk():
-                    print("\033[1;20;31m\nERROR: INCORRECT MOBILE NUMBER\033[0m")
-                    print("\033[1;20;31m\nYOU HAVE ONLY\033[0m",f'\033[1;20;33m{a}\033[0m','\033[1;20;31mMORE ATTEMPTS\033[0m')
-                    global mo
-                    mo = input("RE-ENTER YOUR MOBILE NUMBER:\n>>> ")
-                                
-                if len(mob) == 10:
-                    for i in mob:
-                        if i.isalpha():
-                            chk()
-                            break
-                        else:
-                            a = 1
-                            break
-                else:
-                    chk()
-                    mob = mo
-                a-=1
 
-            # If all the 3 chances are over for re-writing the mobile number
-            if len(mob) == 10:
-                for i in mob:
-                    if i.isalpha():
-                        quit()
-                    else:
-                        break
-            else:
-                quit()
-                
-            gender = str(myresult1[0][2])
-            # If all the 3 chances are over for re-writing the mobile number
-            if len(mob) == 10:
-                for i in mob:
-                    if i.isalpha():
-                        create_acc()
-                        break
-                    else:
-                        break
-            else:
-                create_acc()
-
-            # Function to generate a new upi id
             def upi_gen(email):
                 email_index = email.index("@")
                 email_l = email[:email_index]
-                formula = "select upi_id from acc_statement"
+                formula = "select upi_id from acc_details"
                 mycursor.execute(formula)
                 myresult = mycursor.fetchall()
                 def gen_upii():
@@ -107,7 +117,7 @@ def create_acc():
 
             # Function to generate a new account number
             def accno_gen():
-                formula = "select acc_no from acc_statement"
+                formula = "select acc_no from acc_details"
                 mycursor.execute(formula)
                 myresult = mycursor.fetchall()
                 def gen_acc_no():
@@ -127,7 +137,7 @@ def create_acc():
 
             # Function to generate IFSC code
             def ifsc_gen():
-                formula = "select ifsc from acc_statement"
+                formula = "select ifsc from acc_details"
                 # dictionary of branches of our bank
                 dict_state = {
                     "ap": pd.Series(["Visakhapatnam", "Vijayawada"]),
@@ -242,9 +252,7 @@ def create_acc():
 
             ifsc_gen()
 
-            import login                         
-            global acc_deta
-            acc_deta = (name,gen_upi,gen_accno,gen_ifsc,mob,gen_date,login.final_uid,state,dob,gender)
+            acc_deta = (name,gen_upi,gen_accno,gen_ifsc,gen_date,gn_uid,state,dob,gender)
             acc_data = {"NAME":name,
                         'UPI ID':gen_upi,
                         'ACCOUNT NUMBER':gen_accno,
@@ -252,55 +260,19 @@ def create_acc():
                         'ACCOUNT CREATED ON':gen_date
                         }
             global df_acc_data
-            df_acc_data = pd.DataFrame([acc_data],index = [login.final_uid])
-            formula1 = "insert into acc_statement (cu_name,upi_id,acc_no,ifsc,mobile_no,Date_of_opening,uid,state,dob,gender) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+            df_acc_data = pd.DataFrame([acc_data],index = [gn_uid])
+            formula1 = "insert into acc_details (cu_name,upi_id,acc_no,ifsc,Date_of_opening,uid,state,dob,gender) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             mycursor.execute(formula1,acc_deta)
             mydb.commit()
+
+            formula1 = "insert into login_details (name,passwd,gender,uid) values (%s,%s,%s,%s)"
+            mycursor.execute(formula1,user_info)
+            mydb.commit()
+
+            print("\033[1;20;34m\n##### YOU'RE NEWLY CREATED USER ID:#####\033[0m",f"\033[1;20;33m{gn_uid}\033[0m,\033[1;20;34m#####\033[0m")
+            print("\033[1;20;34m\n##### PASSWORD:\033[0m",f"\033[1;20;33m{c_passwd}\033[0m"+"\033[1;20;34m #####\n\033[0m")
         print(df_acc_data,'\n')
-
-        print("\n"+"-"*39)
-        print("+++++",end="")
-        print("\033[1;20;33m ACCOUNT CREATION SUCCESSFUL \033[0m",end="")
-        print("+++++")
-        print("-"*39)
-
+        
     create_acc2()
-
-def init_create_acc():
     import login
-    ui = login.final_uid
-    formula2 = f"select uid from acc_statement where uid = '{ui}'"
-    mycursor.execute(formula2)
-    retrived_uid  = mycursor.fetchall()
-    if login.lstatus:
-        if len(retrived_uid)!=0:
-            if ui not in retrived_uid[0]:
-                global acc_created
-                def confirmation():
-                    inp_confirmation = input("TO PROCEED BY CREATING AN ACCOUNT (FULL ACCESS) PRESS- y/Y"+"\n"+" "*30+"(OR)"+"\n"+"TO PROCEED BY WITHOUT AN ACCOUNT (LIMITED ACCESS) PRESS- n/N"+"\n\n"+">>> ").lower()
-                    print()
-                    if inp_confirmation == "y":
-                        create_acc()
-                        acc_created = True
-                    elif inp_confirmation == "n":
-                        acc_created = False
-                    else:
-                        print("\033[1;20;31m\nERROR: WRONG INPUT!\nTRYAGAIN!\033[0m")
-                        confirmation()
-                confirmation()
-            else:
-                pass
-        elif len(retrived_uid)==0:
-            global acc_created
-            def confirmation():
-                inp_confirmation = input("TO PROCEED BY CREATING AN ACCOUNT (FULL ACCESS) PRESS- y/Y"+"\n"+" "*30+"(OR)"+"\n"+"TO PROCEED BY WITHOUT AN ACCOUNT (LIMITED ACCESS) PRESS- n/N"+"\n\n"+">>> ").lower()
-                print()
-                if inp_confirmation == "y":
-                    create_acc()
-                    acc_created = True
-                elif inp_confirmation == "n":
-                    acc_created = False
-                else:
-                    print("\033[1;20;31m\nERROR: WRONG INPUT!\nTRYAGAIN!\033[0m")
-                    confirmation()
-            confirmation()
+    login.signin()

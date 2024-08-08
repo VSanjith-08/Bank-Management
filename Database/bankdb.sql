@@ -16,18 +16,17 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `acc_statement`
+-- Table structure for table `acc_details`
 --
 
-DROP TABLE IF EXISTS `acc_statement`;
+DROP TABLE IF EXISTS `acc_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `acc_statement` (
+CREATE TABLE `acc_details` (
   `cu_name` varchar(30) NOT NULL,
   `upi_id` varchar(30) DEFAULT NULL,
   `acc_no` int NOT NULL,
   `Ifsc` varchar(10) NOT NULL,
-  `mobile_no` varchar(11) DEFAULT NULL,
   `Date_of_opening` datetime NOT NULL,
   `uid` varchar(20) DEFAULT NULL,
   `state` varchar(3) DEFAULT NULL,
@@ -37,13 +36,13 @@ CREATE TABLE `acc_statement` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `acc_statement`
+-- Dumping data for table `acc_details`
 --
 
-LOCK TABLES `acc_statement` WRITE;
-/*!40000 ALTER TABLE `acc_statement` DISABLE KEYS */;
-INSERT INTO `acc_statement` VALUES ('V SANJITH','sanjith.in867@okjstbnk',8830495,'JSTBNK01','9445141644','2024-08-05 00:00:00','vsanjith','tn','2007-08-31','M');
-/*!40000 ALTER TABLE `acc_statement` ENABLE KEYS */;
+LOCK TABLES `acc_details` WRITE;
+/*!40000 ALTER TABLE `acc_details` DISABLE KEYS */;
+INSERT INTO `acc_details` VALUES ('V SANJITH','vsanjith.ind789@okjstbnk',7395033,'JSTBNK01','2024-08-08 00:00:00','vsanjit354','tn','2007-08-31','M');
+/*!40000 ALTER TABLE `acc_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -54,8 +53,7 @@ DROP TABLE IF EXISTS `login_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `login_details` (
-  `firstname` varchar(50) DEFAULT NULL,
-  `lastname` varchar(50) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
   `passwd` varchar(100) NOT NULL,
   `gender` char(2) NOT NULL,
   `uid` varchar(20) NOT NULL,
@@ -69,7 +67,7 @@ CREATE TABLE `login_details` (
 
 LOCK TABLES `login_details` WRITE;
 /*!40000 ALTER TABLE `login_details` DISABLE KEYS */;
-INSERT INTO `login_details` VALUES ('V','SANJITH','Sanjith123.','M','vsanjith');
+INSERT INTO `login_details` VALUES ('V SANJITH','Sanjith123.','M','vsanjit354');
 /*!40000 ALTER TABLE `login_details` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -82,4 +80,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-06  0:02:23
+-- Dump completed on 2024-08-08 19:45:08

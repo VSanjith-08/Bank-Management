@@ -24,4 +24,8 @@ import login
 login.init_login()
 
 import create_acc
-create_acc.init_create_acc()
+if create_acc.acc_created:
+    import transaction
+    transaction.init_tm()
+else:
+    print("Hello World!")
