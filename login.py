@@ -19,21 +19,6 @@ def signin():
     print("\033[1;20;92m|::: THIS IS SIGN-IN PAGE :::|\033[0m")
     print("\033[1;20;92m=\033[0m"*30,"\n")
 
-    import create_acc
-
-    if create_acc.acc_created:
-        def login_continue():
-            log_continue = input("\nDO YOU WANT TO CONTINUE y/Y, TO ABORT n/N: ").lower()
-            if log_continue in ['y','n']:
-                if log_continue == 'y':
-                    signin()
-                elif log_continue == 'n':
-                    quit()
-            else:
-                print('\nWRONG INPUT!')
-                login_continue()
-        login_continue()
-
     formula = f"select uid from login_details"
     mycursor.execute(formula)
     retrived_uid = mycursor.fetchall()

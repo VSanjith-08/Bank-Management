@@ -269,10 +269,18 @@ def create_acc():
             mycursor.execute(formula1,user_info)
             mydb.commit()
 
-            print("\033[1;20;34m\n##### YOU'RE NEWLY CREATED USER ID:#####\033[0m",f"\033[1;20;33m{gn_uid}\033[0m,\033[1;20;34m#####\033[0m")
+            print("\033[1;20;34m\n##### YOU'RE NEWLY GENERATED USER ID:#####\033[0m",f"\033[1;20;33m{gn_uid}\033[0m,\033[1;20;34m#####\033[0m")
             print("\033[1;20;34m\n##### PASSWORD:\033[0m",f"\033[1;20;33m{c_passwd}\033[0m"+"\033[1;20;34m #####\n\033[0m")
         print(df_acc_data,'\n')
         
+        print("\n"+"-"*40)
+        print("+++++",end="")
+        print("\033[1;20;33m ACCOUNT CREATION SUCCESSFULL \033[0m",end="")
+        print("+++++")
+        print("-"*40)
+        terminal_width = os.get_terminal_size().columns
+        print("_"*terminal_width,"\n")
+
     create_acc2()
     import login
     login.signin()
