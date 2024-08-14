@@ -19,7 +19,7 @@ def signin():
     print("\033[1;20;92m|::: THIS IS SIGN-IN PAGE :::|\033[0m")
     print("\033[1;20;92m=\033[0m"*30,"\n")
 
-    formula = f"select uid from login_details"
+    formula = f"select uid from acc_details"
     mycursor.execute(formula)
     retrived_uid = mycursor.fetchall()
 
@@ -27,7 +27,7 @@ def signin():
     for i in retrived_uid:
         arr_retrived_uid = np.concatenate((arr_retrived_uid,np.array([i[0]])))
     
-    formula1 = f"select passwd from login_details"
+    formula1 = f"select passwd from acc_details"
     mycursor.execute(formula1)
     retrived_passwd = mycursor.fetchall()
     
@@ -38,7 +38,6 @@ def signin():
     uid_pass = False
     global passwd_pass
     passwd_pass = False
-
     global inp_uid
     inp_uid = input("UID: ")
     if inp_uid in arr_retrived_uid:
@@ -57,6 +56,7 @@ def signin():
             i-=1
 
     print()
+    global inp_passwd
     inp_passwd = input("PASSWORD: ")
     if inp_passwd in arr_retrived_passwd:
         passwd_pass = True
@@ -78,7 +78,7 @@ def signin():
     print("+++++")
     print("-"*34)
     terminal_width = os.get_terminal_size().columns
-    print("_"*terminal_width,"\n")
+    print("_"*terminal_width)
 
 def admin():
     print("this is admin module")

@@ -31,7 +31,8 @@ CREATE TABLE `acc_details` (
   `uid` varchar(20) DEFAULT NULL,
   `state` varchar(3) DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `gender` char(2) DEFAULT NULL
+  `gender` char(2) DEFAULT NULL,
+  `passwd` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -41,34 +42,8 @@ CREATE TABLE `acc_details` (
 
 LOCK TABLES `acc_details` WRITE;
 /*!40000 ALTER TABLE `acc_details` DISABLE KEYS */;
-INSERT INTO `acc_details` VALUES ('V SANJITH','vsanjith.ind789@okjstbnk',7395033,'JSTBNK01','2024-08-08 00:00:00','vsanjit354','tn','2007-08-31','M');
+INSERT INTO `acc_details` VALUES ('D VALARMATHY','valarmathy764@okjstbnk',1854993,'JSTBNK02','2024-08-14 00:00:00','DVALARM243','tn','2007-08-31','F','Valarmathy123.'),('sanjith','sanjith@ok',31082007,'JSTBNK01','2007-08-31 00:00:00','sanjith','tn','2007-08-31','M','sanjith');
 /*!40000 ALTER TABLE `acc_details` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `login_details`
---
-
-DROP TABLE IF EXISTS `login_details`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `login_details` (
-  `name` varchar(50) DEFAULT NULL,
-  `passwd` varchar(100) NOT NULL,
-  `gender` char(2) NOT NULL,
-  `uid` varchar(20) NOT NULL,
-  PRIMARY KEY (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `login_details`
---
-
-LOCK TABLES `login_details` WRITE;
-/*!40000 ALTER TABLE `login_details` DISABLE KEYS */;
-INSERT INTO `login_details` VALUES ('V SANJITH','Sanjith123.','M','vsanjit354');
-/*!40000 ALTER TABLE `login_details` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -80,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-08 19:45:08
+-- Dump completed on 2024-08-14 23:44:25

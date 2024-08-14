@@ -55,7 +55,7 @@ def create_acc():
     passwd()
 
     def uid():
-        formula = "select uid from login_details"
+        formula = "select uid from acc_details"
         mycursor.execute(formula)
         myresult = mycursor.fetchall()
 
@@ -78,7 +78,7 @@ def create_acc():
                 gen_uiid()
     uid()
 
-    user_info=(name,c_passwd,gender,gn_uid)
+
 
     def create_acc2():
         if True:
@@ -252,7 +252,7 @@ def create_acc():
 
             ifsc_gen()
 
-            acc_deta = (name,gen_upi,gen_accno,gen_ifsc,gen_date,gn_uid,state,dob,gender)
+            acc_deta = (name,gen_upi,gen_accno,gen_ifsc,gen_date,gn_uid,state,dob,gender,c_passwd)
             acc_data = {"NAME":name,
                         'UPI ID':gen_upi,
                         'ACCOUNT NUMBER':gen_accno,
@@ -261,12 +261,8 @@ def create_acc():
                         }
             global df_acc_data
             df_acc_data = pd.DataFrame([acc_data],index = [gn_uid])
-            formula1 = "insert into acc_details (cu_name,upi_id,acc_no,ifsc,Date_of_opening,uid,state,dob,gender) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+            formula1 = "insert into acc_details (cu_name,upi_id,acc_no,ifsc,Date_of_opening,uid,state,dob,gender,passwd) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             mycursor.execute(formula1,acc_deta)
-            mydb.commit()
-
-            formula1 = "insert into login_details (name,passwd,gender,uid) values (%s,%s,%s,%s)"
-            mycursor.execute(formula1,user_info)
             mydb.commit()
 
             print("\033[1;20;34m\n##### YOU'RE NEWLY GENERATED USER ID:#####\033[0m",f"\033[1;20;33m{gn_uid}\033[0m,\033[1;20;34m#####\033[0m")
