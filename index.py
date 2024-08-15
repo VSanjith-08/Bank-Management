@@ -26,32 +26,6 @@ import login
 login.init_login()
 
 # Funtion for money transaction _init_
-
-def main_menu():
-    print("\n"+"\033[1;20;34m=\033[0m"*19)
-    print("\033[1;20;34m|::: MAIN MENU :::|\033[0m")
-    print("\033[1;20;34m=\033[0m"*19)
-    print('''
-CHOOSE THE OPTION FROM THE FOLLOWING:
-1 - TRANSFER MONEY
-    (DEPOSIT, WITHDRAWL)
-          
-2 - ACCOUNT SERVICES
-    (ACCOUNT STATEMENT, MINI STATEMENT, ACCOUNT BALENCE, Etc.)
-''')
-    # Function to repeat the input if the user gives a wrong input
-    def inp_confi():
-        global inp_conf
-        inp_conf = int(input(">>> "))
-    inp_confi()
-    
-    if inp_conf in [1,2]:
-        if inp_conf == 1:
-            import upi
-            upi.init_transfermoney()
-
-    else:
-        print("\033[1;20;31m\nERROR: WRONG INPUT!\nTRYAGAIN!\033[0m\n")
-        inp_confi()
-
-main_menu()
+if login.login:
+    import init_mainmenu as _mainmenu_
+    _mainmenu_.mainmenu()
