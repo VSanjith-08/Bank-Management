@@ -1,1 +1,3 @@
-mode,transact_id,from,to,credit,debit,balance
+,uid,mode,transact_type,transact_id,from,to,credit,debit,balance
+0,jstbnk,upi,debit,31082007,jstbnk@okhdfc,sanjith@ok,0,100000,100000000
+1,sanjith,upi,credit,31082008,jstbnk@okhdfc,sanjith@ok,100000,0,100000

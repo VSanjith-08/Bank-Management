@@ -20,6 +20,7 @@ CHOOSE THE OPTION FROM THE FOLLOWING:
         
         if inp_conf in [1,2]:
             if inp_conf == 1:
+                print()
                 print("_"*os.get_terminal_size().columns)
                 import Transaction
                 Transaction.init_transfermoney()
