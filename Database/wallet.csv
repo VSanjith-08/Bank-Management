@@ -1,3 +1,3 @@
 ,uid,mode,transact_type,transact_id,credit,debit,balance
-0,sanjith,upi,credit,31082009,10000,0,10000
-1,sanjith,upi,credit,31082011,43243,0,53243
+0,jstbnk,upi,credit,31082009,0,0,0
+

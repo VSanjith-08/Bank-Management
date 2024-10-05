@@ -17,6 +17,8 @@ mycursor = mydb.cursor()
 def transaction_df():
     global df_transaction
     df_transaction = pd.read_csv("Database//transaction.csv",index_col = 0)
+    global df_wallet
+    df_wallet = pd.read_csv("Database//wallet.csv",index_col = 0)
 transaction_df()
 
 import login
@@ -24,16 +26,6 @@ upi_passwd = login.inp_passwd
 u_id = login.inp_uid
 
 def upi():
-    '''
-    # Initials
-    global upi_passwd,u_id
-    upi_passwd = 'sanjith'
-    u_id = 'sanjith'
-    #withdrawl = init_transfermoney.withdrawl
-    withdrawl = True
-    '''
-###################################################
-
 
     formula1 = f"select upi_id,cu_name from acc_details where uid = '{u_id}' and passwd = '{upi_passwd}'"
     mycursor.execute(formula1)
@@ -162,7 +154,6 @@ def upi():
         retrived_accno_ifsc_codes = mycursor.fetchall()
         ifsc_payer = retrived_accno_ifsc_codes[0][1]
         acc_no_payer = retrived_accno_ifsc_codes[0][0]
-        
         acc_payer_inp = int(input("\nACCOUNT NUMBER: "))
 
         if acc_payer_inp == acc_no_payer:
@@ -295,9 +286,25 @@ def withdrawl_upi():
         Bank_balence_wallettable_afterwithdrawn=[0]
     
     def transact_id():
-        transact_no = df_transaction.loc[:,'transact_id'].tail(1).values
+        transact_no1 = df_transaction.loc[:,'transact_id'].tail(1).values
+        transact_no2 = df_wallet.loc[:,'transact_id'].tail(1).values
+
+        try:
+            transact_no1.tolist()[0]
+        except:
+            transact_no1 = np.array([0])
+
+        try:
+            transact_no2.tolist()[0]
+        except:
+            transact_no2 = np.array([0])
+
         global transaction_id
-        transaction_id = transact_no.tolist()[0]+1
+        if transact_no1>transact_no2:
+            transaction_id = transact_no1.tolist()[0]+1
+        else:
+            transaction_id = transact_no2.tolist()[0]+1
+            
     transact_id()
 
     index_transaction = df_transaction.tail(1).index.values.tolist()[0]+1
@@ -397,14 +404,31 @@ def deposit_upi():
         Bank_balance_after_deposit2=[0]
 
     def transact_id():
-        transact_no = df_transaction.loc[:,'transact_id'].tail(1).values
+        transact_no1 = df_transaction.loc[:,'transact_id'].tail(1).values
+        transact_no2 = df_wallet.loc[:,'transact_id'].tail(1).values
+
+        try:
+            transact_no1.tolist()[0]
+        except:
+            transact_no1 = np.array([0])
+
+        try:
+            transact_no2.tolist()[0]
+        except:
+            transact_no2 = np.array([0])
+
         global transaction_id
-        transaction_id = transact_no.tolist()[0]+1
+        if transact_no1>transact_no2:
+            transaction_id = transact_no1.tolist()[0]+1
+        else:
+            transaction_id = transact_no2.tolist()[0]+1
+            
     transact_id()
 
     index = df_transaction.tail(1).index.values.tolist()[0]+1
     df_transaction.loc[index] = [u_id,'upi','debit',transaction_id,payer_upi,Payees_upi_id,amount_deposit,0,Bank_balance_after_deposit1[0]-amount_deposit]
     df_transaction.loc[index+1] = [payees_uid,'upi','credit',transaction_id+1,payer_upi,Payees_upi_id,0,amount_deposit,Bank_balance_after_deposit2[0]+amount_deposit]
+    
     df_transaction.to_csv('Database//transaction.csv')
     print()
     print("\033[1;49;93m=\033[0m"*33)
@@ -424,6 +448,218 @@ def deposit_upi():
     print("_"*terminal_width)
     print()
 
+def wallet():
+    formula = f"select acc_no,ifsc from acc_details"
+    mycursor.execute(formula)
+    retrived_accno_ifsc_codes = mycursor.fetchall()
+
+    formula2 = f"select acc_no,ifsc,cu_name from acc_details where passwd = '{upi_passwd}' and uid = '{u_id}'"
+    mycursor.execute(formula2)
+    retrived_accno_ifsc_codes2 = mycursor.fetchall()
+    acc_no_payer = retrived_accno_ifsc_codes2[0][0]
+    global payer_name
+    payer_name = retrived_accno_ifsc_codes2[0][2]
+    global acc_payee_inp
+    acc_payee_inp = int(input("\nPAYEE'S ACCOUNT NUMBER: "))
+
+    for i in retrived_accno_ifsc_codes:
+        if i[0]==acc_payee_inp and i[0] != acc_no_payer:
+            stopper_deposit = False
+            break
+        else:
+            stopper_deposit = True
+
+    attempt = 2
+    while stopper_deposit:
+        if attempt != 0:
+            print("\033[1;20;31m\n### ERROR: INCORRECT ACCOUNT NUMBER ###\033[0m")
+            acc_payee_inp = int(input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER YOUR CORRECT ACCOUNT NUMBER: "))
+            for i in retrived_accno_ifsc_codes:
+                if i[0]==acc_payee_inp and i[0] != acc_no_payer:
+                    stopper_deposit = False
+                    break
+                else:
+                    stopper_deposit = True
+
+        else:
+            print("\033[1;20;31m\n### ERROR: INCORRECT ACCOUNT NUMBER ###\033[0m")
+            print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE\033[0m")
+            print("_"*os.get_terminal_size().columns)
+            init_transfermoney()
+            break
+        attempt-=1
+
+    for i in retrived_accno_ifsc_codes:
+        if i[0] == acc_payee_inp:
+            ifsc_payee = i[1]
+    
+    ifsc_payee_inp = input("\nPAYEE'S IFSC CODE: ")
+    
+    if ifsc_payee_inp == ifsc_payee:
+        stopper_ifsc = False
+    else:
+        stopper_ifsc = True
+    
+    attempt = 2
+    while stopper_ifsc:
+        if attempt != 0:
+            print("\033[1;20;31m\n### ERROR: INCORRECT IFSC CODE ###\033[0m")
+            ifsc_payee_inp = input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER THE CORRECT IFSC CODE: ")
+            if ifsc_payee_inp == ifsc_payee:
+                stopper_ifsc = False
+            else:
+                stopper_ifsc == True
+
+        else:
+            print("\033[1;20;31m\n### ERROR: INCORRECT IFSC CODE ###\033[0m")
+            print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE\033[0m")
+            print("_"*os.get_terminal_size().columns)
+            init_transfermoney()
+            break
+        attempt-=1
+    
+    passwd_inp = input("\nLOGIN PASSWORD: ")
+    stopper_passwd = True
+
+    # Checking the passwd
+    if passwd_inp == upi_passwd:
+        stopper_passwd = False
+    else:
+        stopper_passwd = True
+
+    if True:
+        # Making only two attempts for the user to write the payee's upi id
+        attempt = 2
+        while stopper_passwd:
+            if attempt != 0:
+                print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
+                re_passwd_inp = input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER YOUR CORRECT LOGIN PASSWORD: ")
+                if re_passwd_inp == upi_passwd:
+                    stopper_passwd = False
+                else:
+                    stopper_passwd = True
+            else:
+                print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
+                print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE MAIN MENU\033[0m")
+                print("_"*os.get_terminal_size().columns)
+                import init_mainmenu
+                init_mainmenu.mainmenu()
+            attempt-=1
+
+    amt = int(input("\nAMOUNT OF MONEY TO BE TRANSFERRED: "))
+
+    df_wallet = pd.read_csv("Database//wallet.csv",index_col = 0)
+
+    Wallet_balance = df_wallet.loc[df_wallet.uid == u_id].loc[:,'balance'].tail(1).values.tolist()
+    try:
+        Wallet_balance[0]
+    except:
+        Wallet_balance = [0]
+
+    def amt_check(amt):
+        global stopper_amt
+        if amt <= Wallet_balance[0]:
+            stopper_amt = False
+        else:
+            stopper_amt = True
+    amt_check(amt)
+
+    attempt = 2
+    re_amt = ""
+    while stopper_amt:
+        if attempt != 0:
+            print("\033[1;20;31m\n### ERROR: INSUFFICIENT BALENCE ###\033[0m")
+            re_amt = int(input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER THE CORRECT AMOUNT: "))
+            amt_check(re_amt)
+
+        else:
+            print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
+            print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE\033[0m")
+            print("_"*os.get_terminal_size().columns)
+            init_transfermoney()
+            break
+        attempt-=1
+    
+    global amount_transferred
+    if re_amt != "":
+        amount_transferred = re_amt
+    else:
+        amount_transferred = amt
+    
+    captcha()
+    if captcha_pass:
+        deposit_wallet()
+
+
+def deposit_wallet():
+    formula = f"select cu_name from acc_details where acc_no = '{acc_payee_inp}'"
+    mycursor.execute(formula)
+    tuple_of_name = mycursor.fetchall()[0]
+    payee_name = tuple_of_name[0]
+
+    df_wallet = pd.read_csv("Database//wallet.csv",index_col = 0)
+    Bank_balance_transactiontable_afterdeposit = df_transaction.loc[df_transaction.uid == u_id].loc[:,'balance'].tail(1).values.tolist()
+    Bank_balence_wallettable_afterwithdrawn = df_wallet[df_wallet.uid == u_id].loc[:,'balance'].tail(1).values.tolist()
+    
+    try:
+        Bank_balance_transactiontable_afterdeposit[0]
+    except:
+        Bank_balance_transactiontable_afterdeposit=[0]
+
+    try:
+        Bank_balence_wallettable_afterwithdrawn[0]
+    except:
+        Bank_balence_wallettable_afterwithdrawn=[0]
+    
+    def transact_id():
+        transact_no1 = df_transaction.loc[:,'transact_id'].tail(1).values
+        transact_no2 = df_wallet.loc[:,'transact_id'].tail(1).values
+
+        try:
+            transact_no1.tolist()[0]
+        except:
+            transact_no1 = np.array([0])
+
+        try:
+            transact_no2.tolist()[0]
+        except:
+            transact_no2 = np.array([0])
+
+        global transaction_id
+        if transact_no1>transact_no2:
+            transaction_id = transact_no1.tolist()[0]+1
+        else:
+            transaction_id = transact_no2.tolist()[0]+1
+
+    transact_id()
+
+    index_transaction = df_transaction.tail(1).index.values.tolist()[0]+1
+    index_wallet = df_wallet.tail(1).index.values.tolist()[0]+1
+
+    df_transaction.loc[index_transaction] = [u_id,'wallet','credit',transaction_id,"wallet",acc_payee_inp,amount_transferred,0,Bank_balance_transactiontable_afterdeposit[0]+amount_transferred]
+    df_wallet.loc[index_wallet] = [u_id,'wallet','debit',transaction_id+1,0,amount_transferred,Bank_balence_wallettable_afterwithdrawn[0]-amount_transferred]
+
+    df_transaction.to_csv('Database//transaction.csv')
+    df_wallet.to_csv('Database//wallet.csv')
+
+    print()
+    print("\033[1;49;93m=\033[0m"*33)
+    print("\033[1;49;93m|::: TRANSACTION SUCCESSFULL :::|\033[0m")
+    print("\033[1;49;93m=\033[0m"*33)
+    print("\033[1;20;96mTRANSACTION TYPE: \033[0m")
+    print(f"\033[1;20;34mDEPOSIT\033[0m")
+    print("\033[1;20;96mTRANSACTION ID: \033[0m")
+    print(f"\033[1;20;34m{transaction_id}\033[0m")
+    print("\033[1;20;96mAMOUNT TRANSFERRED: \033[0m")
+    print(f"\033[1;20;34m{amount_transferred}\033[0m")
+    print(f"\033[1;20;96mTO: {payee_name} (JUST BANK ACCOUNT)\033[0m")
+    print(f"\033[1;20;34m{acc_payee_inp}\033[0m")
+    print(f"\033[1;20;96mFROM: {payer_name} (JUST BANK ACCOUNT)\033[0m")
+    print(f"\033[1;20;34mWALLET\033[0m")
+    terminal_width = os.get_terminal_size().columns
+    print("_"*terminal_width)
+    print()
+
 ######################
 # Init for this module
 def init_transfermoney():
@@ -432,8 +668,8 @@ def init_transfermoney():
         print("\033[1;20;96m=\033[0m"*29)
         print("""
 CHOOSE YOUR MODE OF TRANSACTION
-1 - DEPOSIT           
-2 - WITHDRAWL
+1 - SEND MONEY           
+2 - WITHDRAW MONEY
 3 - MAIN MENU
 """)
         # Function to repeat the input if the user gives a wrong input
@@ -452,6 +688,7 @@ DIGITAL DEPOSIT OPTIONS
 1 - UPI
 2 - NET BANKING
 3 - WALLET
+4 - MAIN MENU
 """)
                 # Function to repeat the input if the user gives a wrong input
                 def inp_dep_opti():
@@ -462,6 +699,12 @@ DIGITAL DEPOSIT OPTIONS
                 if inp_dep_opt in [1,2,3]:
                     if inp_dep_opt == 1:
                         upi()
+                    if inp_dep_opt == 3:
+                        wallet()
+                    if inp_dep_opt == 4:
+                        print("_"*os.get_terminal_size().columns)
+                        import init_mainmenu
+                        init_mainmenu.mainmenu()
                 else:
                     print("\033[1;20;31m\nERROR: WRONG INPUT!\nTRYAGAIN!\033[0m\n")
                     inp_dep_opti()
@@ -473,7 +716,7 @@ DIGITAL DEPOSIT OPTIONS
 DIGITAL WITHDRAWL OPTIONS
 1 - UPI
 2 - NET BANKING
-3 - WALLET
+3 - MAIN MENU
 """)
                 # Function to repeat the input if the user gives a wrong input
                 def inp_wit_opti():
@@ -486,6 +729,10 @@ DIGITAL WITHDRAWL OPTIONS
                         # Making a bool to make sure deposit and withdraw do not coincide
                         withdrawl = True
                         upi()
+                    if inp_wit_opt == 3:
+                        print("_"*os.get_terminal_size().columns)
+                        import init_mainmenu
+                        init_mainmenu.mainmenu()
                 else:
                     print("\033[1;20;31m\nERROR: WRONG INPUT!\nTRYAGAIN!\033[0m\n")
                     inp_wit_opti()
