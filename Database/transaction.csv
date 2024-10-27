@@ -1,4 +1,5 @@
-,uid,mode,transact_type,transact_id,from,to,credit,debit,balance
-0,jstbnk,upi,debit,31082007,jstbnk@okhdfc,sanjith@ok,0,100000,100000000
-1,sanjith,upi,credit,31082008,jstbnk@okhdfc,sanjith@ok,100000,0,100000
-
+,uid,mode,transact_type,transact_id,from,to,credit,debit,balance,timestamp
+0,jstbnk,upi,debit,31082007,jstbnk@okhdfc,sanjith@ok,0,100000,100000000,0
+1,sanjith,upi,credit,31082008,jstbnk@okhdfc,sanjith@ok,100000,0,100000,0
+2,sanjith,upi,debit,31082010,sanjith@ok,san@san,100,0,99900,2024-10-27 21:28:53.249170
+3,san,upi,credit,31082011,sanjith@ok,san@san,0,100,100,2024-10-27 21:28:53.256742

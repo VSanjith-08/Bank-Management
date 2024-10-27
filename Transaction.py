@@ -60,12 +60,12 @@ def upi():
             re_payee_upi = ""
             while stopper_upi:
                 if attempt != 0:
-                    print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
+                    print("\n### ERROR: INCORRECT INPUT ###")
                     re_payee_upi = input(f"YOU HAVE {attempt} MORE CHANCE\n\nRE-ENTER PAYEE'S UPI ADDRESS: ")
                     payee_upi_checker(re_payee_upi)
                 else:
-                    print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
-                    print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE MAIN MENU\033[0m")
+                    print("\n### ERROR: INCORRECT INPUT ###")
+                    print("YOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE MAIN MENU")
                     print("_"*os.get_terminal_size().columns)
                     import init_mainmenu
                     init_mainmenu.mainmenu()
@@ -91,15 +91,15 @@ def upi():
             attempt = 2
             while stopper_passwd:
                 if attempt != 0:
-                    print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
+                    print("\n### ERROR: INCORRECT INPUT ###")
                     re_passwd_inp = input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER YOUR CORRECT LOGIN PASSWORD: ")
                     if re_passwd_inp == upi_passwd:
                         stopper_passwd = False
                     else:
                         stopper_passwd = True
                 else:
-                    print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
-                    print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE MAIN MENU\033[0m")
+                    print("\n### ERROR: INCORRECT INPUT ###")
+                    print("YOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE MAIN MENU")
                     print("_"*os.get_terminal_size().columns)
                     import init_mainmenu
                     init_mainmenu.mainmenu()
@@ -126,13 +126,13 @@ def upi():
         re_amt = ""
         while stopper_amt:
             if attempt != 0:
-                print("\033[1;20;31m\n### ERROR: INSUFFICIENT BALENCE ###\033[0m")
+                print("\n### ERROR: INSUFFICIENT BALENCE ###")
                 re_amt = int(input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER THE CORRECT AMOUNT: "))
                 amt_check(re_amt)
 
             else:
-                print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
-                print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE\033[0m")
+                print("\n### ERROR: INCORRECT INPUT ###")
+                print("YOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE")
                 print("_"*os.get_terminal_size().columns)
                 init_transfermoney()
                 break
@@ -164,14 +164,14 @@ def upi():
         attempt = 2
         while stopper_withdrawl:
             if attempt != 0:
-                print("\033[1;20;31m\n### ERROR: INCORRECT ACCOUNT NUMBER ###\033[0m")
+                print("\n### ERROR: INCORRECT ACCOUNT NUMBER ###")
                 acc_payer_inp = int(input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER YOUR CORRECT ACCOUNT NUMBER: "))
                 if acc_payer_inp == acc_no_payer:
                     stopper_withdrawl = False
 
             else:
-                print("\033[1;20;31m\n### ERROR: INCORRECT ACCOUNT NUMBER ###\033[0m")
-                print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE\033[0m")
+                print("\n### ERROR: INCORRECT ACCOUNT NUMBER ###")
+                print("YOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE")
                 print("_"*os.get_terminal_size().columns)
                 init_transfermoney()
                 break
@@ -187,14 +187,14 @@ def upi():
         attempt = 2
         while stopper_ifsc:
             if attempt != 0:
-                print("\033[1;20;31m\n### ERROR: INCORRECT IFSC CODE ###\033[0m")
+                print("\n### ERROR: INCORRECT IFSC CODE ###")
                 ifsc_payer_inp = input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER YOUR CORRECT IFSC CODE: ")
                 if ifsc_payer_inp == ifsc_payer:
                     stopper_ifsc = False
 
             else:
-                print("\033[1;20;31m\n### ERROR: INCORRECT IFSC CODE ###\033[0m")
-                print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE\033[0m")
+                print("\n### ERROR: INCORRECT IFSC CODE ###")
+                print("YOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE")
                 print("_"*os.get_terminal_size().columns)
                 init_transfermoney()
                 break
@@ -214,15 +214,15 @@ def upi():
             attempt = 2
             while stopper_passwd:
                 if attempt != 0:
-                    print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
+                    print("\n### ERROR: INCORRECT INPUT ###")
                     re_passwd_inp = input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER YOUR CORRECT LOGIN PASSWORD: ")
                     if re_passwd_inp == upi_passwd:
                         stopper_passwd = False
                     else:
                         stopper_passwd = True
                 else:
-                    print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
-                    print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE MAIN MENU\033[0m")
+                    print("\n### ERROR: INCORRECT INPUT ###")
+                    print("YOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE MAIN MENU")
                     print("_"*os.get_terminal_size().columns)
                     import init_mainmenu
                     init_mainmenu.mainmenu()
@@ -248,13 +248,13 @@ def upi():
         re_amt = ""
         while stopper_amt:
             if attempt != 0:
-                print("\033[1;20;31m\n### ERROR: INSUFFICIENT BALENCE ###\033[0m")
+                print("\n### ERROR: INSUFFICIENT BALENCE ###")
                 re_amt = int(input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER THE CORRECT AMOUNT: "))
                 amt_check(re_amt)
 
             else:
-                print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
-                print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE\033[0m")
+                print("\n### ERROR: INCORRECT INPUT ###")
+                print("YOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE")
                 print("_"*os.get_terminal_size().columns)
                 init_transfermoney()
                 break
@@ -310,24 +310,24 @@ def withdrawl_upi():
     index_transaction = df_transaction.tail(1).index.values.tolist()[0]+1
     index_wallet = df_wallet.tail(1).index.values.tolist()[0]+1
 
-    df_transaction.loc[index_transaction] = [u_id,'upi','debit',transaction_id,payer_upi,"wallet",0,amount_withdraw,Bank_balance_transactiontable_afterwithdrawn[0]-amount_withdraw]
-    df_wallet.loc[index_wallet] = [u_id,'upi','credit',transaction_id+1,amount_withdraw,0,Bank_balence_wallettable_afterwithdrawn[0]+amount_withdraw]
+    df_transaction.loc[index_transaction] = [u_id,'upi','debit',transaction_id,payer_upi,"wallet",0,amount_withdraw,Bank_balance_transactiontable_afterwithdrawn[0]-amount_withdraw,datetime.now()]
+    df_wallet.loc[index_wallet] = [u_id,'upi','credit',transaction_id+1,amount_withdraw,0,Bank_balence_wallettable_afterwithdrawn[0]+amount_withdraw,datetime.now()]
     
     df_transaction.to_csv('Database//transaction.csv')
     df_wallet.to_csv('Database//wallet.csv')
 
     print()
-    print("\033[1;49;93m=\033[0m"*33)
-    print("\033[1;49;93m|::: TRANSACTION SUCCESSFULL :::|\033[0m")
-    print("\033[1;49;93m=\033[0m"*33)
-    print("\033[1;20;96mTRANSACTION TYPE: \033[0m")
-    print(f"\033[1;20;34mWITHDRAWL\033[0m")
-    print("\033[1;20;96mUPI TRANSACTION ID: \033[0m")
-    print(f"\033[1;20;34m{transaction_id}\033[0m")
-    print("\033[1;20;96mAMOUNT TRANSFERRED: \033[0m")
-    print(f"\033[1;20;34m{amount_withdraw}\033[0m")
-    print(f"\033[1;20;96mFROM: {payer_name} (JUST BANK ACCOUNT)\033[0m")
-    print(f"\033[1;20;34m{payer_upi}\033[0m")
+    print("="*33)
+    print("|::: TRANSACTION SUCCESSFULL :::|")
+    print("="*33)
+    print("TRANSACTION TYPE: ")
+    print(f"WITHDRAWL")
+    print("UPI TRANSACTION ID: ")
+    print(f"{transaction_id}")
+    print("AMOUNT TRANSFERRED: ")
+    print(f"{amount_withdraw}")
+    print(f"FROM: {payer_name} (JUST BANK ACCOUNT)")
+    print(f"{payer_upi}")
     terminal_width = os.get_terminal_size().columns
     print("_"*terminal_width)
     print()
@@ -426,24 +426,24 @@ def deposit_upi():
     transact_id()
 
     index = df_transaction.tail(1).index.values.tolist()[0]+1
-    df_transaction.loc[index] = [u_id,'upi','debit',transaction_id,payer_upi,Payees_upi_id,amount_deposit,0,Bank_balance_after_deposit1[0]-amount_deposit]
-    df_transaction.loc[index+1] = [payees_uid,'upi','credit',transaction_id+1,payer_upi,Payees_upi_id,0,amount_deposit,Bank_balance_after_deposit2[0]+amount_deposit]
+    df_transaction.loc[index] = [u_id,'upi','debit',transaction_id,payer_upi,Payees_upi_id,amount_deposit,0,Bank_balance_after_deposit1[0]-amount_deposit,datetime.now()]
+    df_transaction.loc[index+1] = [payees_uid,'upi','credit',transaction_id+1,payer_upi,Payees_upi_id,0,amount_deposit,Bank_balance_after_deposit2[0]+amount_deposit,datetime.now()]
     
     df_transaction.to_csv('Database//transaction.csv')
     print()
-    print("\033[1;49;93m=\033[0m"*33)
-    print("\033[1;49;93m|::: TRANSACTION SUCCESSFULL :::|\033[0m")
-    print("\033[1;49;93m=\033[0m"*33)
-    print("\033[1;20;96mTRANSACTION TYPE: \033[0m")
-    print(f"\033[1;20;34mDEPOSIT\033[0m")
-    print("\033[1;20;96mUPI TRANSACTION ID: \033[0m")
-    print(f"\033[1;20;34m{transaction_id}\033[0m")
-    print("\033[1;20;96mAMOUNT TRANSFERRED: \033[0m")
-    print(f"\033[1;20;34m{amount_deposit}\033[0m")
-    print(f"\033[1;20;96mTO: {payee_name} (JUST BANK ACCOUNT)\033[0m")
-    print(f"\033[1;20;34m{Payees_upi_id}\033[0m")
-    print(f"\033[1;20;96mFROM: {payer_name} (JUST BANK ACCOUNT)\033[0m")
-    print(f"\033[1;20;34m{payer_upi}\033[0m")
+    print("="*33)
+    print("|::: TRANSACTION SUCCESSFULL :::|")
+    print("="*33)
+    print("TRANSACTION TYPE: ")
+    print(f"DEPOSIT")
+    print("UPI TRANSACTION ID: ")
+    print(f"{transaction_id}")
+    print("AMOUNT TRANSFERRED: ")
+    print(f"{amount_deposit}")
+    print(f"TO: {payee_name} (JUST BANK ACCOUNT)")
+    print(f"{Payees_upi_id}")
+    print(f"FROM: {payer_name} (JUST BANK ACCOUNT)")
+    print(f"{payer_upi}")
     terminal_width = os.get_terminal_size().columns
     print("_"*terminal_width)
     print()
@@ -472,7 +472,7 @@ def wallet():
     attempt = 2
     while stopper_deposit:
         if attempt != 0:
-            print("\033[1;20;31m\n### ERROR: INCORRECT ACCOUNT NUMBER ###\033[0m")
+            print("\n### ERROR: INCORRECT ACCOUNT NUMBER ###")
             acc_payee_inp = int(input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER YOUR CORRECT ACCOUNT NUMBER: "))
             for i in retrived_accno_ifsc_codes:
                 if i[0]==acc_payee_inp and i[0] != acc_no_payer:
@@ -482,8 +482,8 @@ def wallet():
                     stopper_deposit = True
 
         else:
-            print("\033[1;20;31m\n### ERROR: INCORRECT ACCOUNT NUMBER ###\033[0m")
-            print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE\033[0m")
+            print("\n### ERROR: INCORRECT ACCOUNT NUMBER ###")
+            print("YOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE")
             print("_"*os.get_terminal_size().columns)
             init_transfermoney()
             break
@@ -503,7 +503,7 @@ def wallet():
     attempt = 2
     while stopper_ifsc:
         if attempt != 0:
-            print("\033[1;20;31m\n### ERROR: INCORRECT IFSC CODE ###\033[0m")
+            print("\n### ERROR: INCORRECT IFSC CODE ###")
             ifsc_payee_inp = input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER THE CORRECT IFSC CODE: ")
             if ifsc_payee_inp == ifsc_payee:
                 stopper_ifsc = False
@@ -511,8 +511,8 @@ def wallet():
                 stopper_ifsc == True
 
         else:
-            print("\033[1;20;31m\n### ERROR: INCORRECT IFSC CODE ###\033[0m")
-            print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE\033[0m")
+            print("\n### ERROR: INCORRECT IFSC CODE ###")
+            print("YOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE")
             print("_"*os.get_terminal_size().columns)
             init_transfermoney()
             break
@@ -532,15 +532,15 @@ def wallet():
         attempt = 2
         while stopper_passwd:
             if attempt != 0:
-                print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
+                print("\n### ERROR: INCORRECT INPUT ###")
                 re_passwd_inp = input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER YOUR CORRECT LOGIN PASSWORD: ")
                 if re_passwd_inp == upi_passwd:
                     stopper_passwd = False
                 else:
                     stopper_passwd = True
             else:
-                print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
-                print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE MAIN MENU\033[0m")
+                print("\n### ERROR: INCORRECT INPUT ###")
+                print("YOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE MAIN MENU")
                 print("_"*os.get_terminal_size().columns)
                 import init_mainmenu
                 init_mainmenu.mainmenu()
@@ -568,13 +568,13 @@ def wallet():
     re_amt = ""
     while stopper_amt:
         if attempt != 0:
-            print("\033[1;20;31m\n### ERROR: INSUFFICIENT BALENCE ###\033[0m")
+            print("\n### ERROR: INSUFFICIENT BALENCE ###")
             re_amt = int(input(f"YOU HAVE {attempt} MORE ATTEMPTS\n\nRE-ENTER THE CORRECT AMOUNT: "))
             amt_check(re_amt)
 
         else:
-            print("\033[1;20;31m\n### ERROR: INCORRECT INPUT ###\033[0m")
-            print("\033[1;20;31mYOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE\033[0m")
+            print("\n### ERROR: INCORRECT INPUT ###")
+            print("YOU'RE INPUTS ARE OVER, WE'RE DIRECTING YOU TO THE TRANSACTIONS PAGE")
             print("_"*os.get_terminal_size().columns)
             init_transfermoney()
             break
@@ -636,26 +636,26 @@ def deposit_wallet():
     index_transaction = df_transaction.tail(1).index.values.tolist()[0]+1
     index_wallet = df_wallet.tail(1).index.values.tolist()[0]+1
 
-    df_transaction.loc[index_transaction] = [u_id,'wallet','credit',transaction_id,"wallet",acc_payee_inp,amount_transferred,0,Bank_balance_transactiontable_afterdeposit[0]+amount_transferred]
-    df_wallet.loc[index_wallet] = [u_id,'wallet','debit',transaction_id+1,0,amount_transferred,Bank_balence_wallettable_afterwithdrawn[0]-amount_transferred]
+    df_transaction.loc[index_transaction] = [u_id,'wallet','credit',transaction_id,"wallet",acc_payee_inp,amount_transferred,0,Bank_balance_transactiontable_afterdeposit[0]+amount_transferred,datetime.now()]
+    df_wallet.loc[index_wallet] = [u_id,'wallet','debit',transaction_id+1,0,amount_transferred,Bank_balence_wallettable_afterwithdrawn[0]-amount_transferred,datetime.now()]
 
     df_transaction.to_csv('Database//transaction.csv')
     df_wallet.to_csv('Database//wallet.csv')
 
     print()
-    print("\033[1;49;93m=\033[0m"*33)
-    print("\033[1;49;93m|::: TRANSACTION SUCCESSFULL :::|\033[0m")
-    print("\033[1;49;93m=\033[0m"*33)
-    print("\033[1;20;96mTRANSACTION TYPE: \033[0m")
-    print(f"\033[1;20;34mDEPOSIT\033[0m")
-    print("\033[1;20;96mTRANSACTION ID: \033[0m")
-    print(f"\033[1;20;34m{transaction_id}\033[0m")
-    print("\033[1;20;96mAMOUNT TRANSFERRED: \033[0m")
-    print(f"\033[1;20;34m{amount_transferred}\033[0m")
-    print(f"\033[1;20;96mTO: {payee_name} (JUST BANK ACCOUNT)\033[0m")
-    print(f"\033[1;20;34m{acc_payee_inp}\033[0m")
-    print(f"\033[1;20;96mFROM: {payer_name} (JUST BANK ACCOUNT)\033[0m")
-    print(f"\033[1;20;34mWALLET\033[0m")
+    print("="*33)
+    print("|::: TRANSACTION SUCCESSFULL :::|")
+    print("="*33)
+    print("TRANSACTION TYPE: ")
+    print(f"DEPOSIT")
+    print("TRANSACTION ID: ")
+    print(f"{transaction_id}")
+    print("AMOUNT TRANSFERRED: ")
+    print(f"{amount_transferred}")
+    print(f"TO: {payee_name} (JUST BANK ACCOUNT)")
+    print(f"{acc_payee_inp}")
+    print(f"FROM: {payer_name} (JUST BANK ACCOUNT)")
+    print(f"WALLET")
     terminal_width = os.get_terminal_size().columns
     print("_"*terminal_width)
     print()
@@ -663,9 +663,9 @@ def deposit_wallet():
 ######################
 # Init for this module
 def init_transfermoney():
-        print("\n"+"\033[1;20;96m=\033[0m"*29)
-        print("\033[1;20;96m|::: TRANSFER MONEY PAGE :::|\033[0m")
-        print("\033[1;20;96m=\033[0m"*29)
+        print("\n"+"="*29)
+        print("|::: TRANSFER MONEY PAGE :::|")
+        print("="*29)
         print("""
 CHOOSE YOUR MODE OF TRANSACTION
 1 - SEND MONEY           
@@ -706,11 +706,11 @@ DIGITAL DEPOSIT OPTIONS
                         import init_mainmenu
                         init_mainmenu.mainmenu()
                 else:
-                    print("\033[1;20;31m\nERROR: WRONG INPUT!\nTRYAGAIN!\033[0m\n")
+                    print("\nERROR: WRONG INPUT!\nTRYAGAIN!\n")
                     inp_dep_opti()
             elif inp_mode == 2:
                 withdrawl = True
-                print("\033[1;20;31m\nNOTE: YOUR WITHDRAWED MONEY WILL BE CREDITED TO YOUR WALLET\033[0m")
+                print("\nNOTE: YOUR WITHDRAWED MONEY WILL BE CREDITED TO YOUR WALLET")
                 print()
                 print("""
 DIGITAL WITHDRAWL OPTIONS
@@ -734,12 +734,12 @@ DIGITAL WITHDRAWL OPTIONS
                         import init_mainmenu
                         init_mainmenu.mainmenu()
                 else:
-                    print("\033[1;20;31m\nERROR: WRONG INPUT!\nTRYAGAIN!\033[0m\n")
+                    print("\nERROR: WRONG INPUT!\nTRYAGAIN!\n")
                     inp_wit_opti()
             elif inp_mode == 3:
                 print("_"*os.get_terminal_size().columns)
                 import init_mainmenu
                 init_mainmenu.mainmenu()
         else:
-            print("\033[1;20;31m\nERROR: WRONG INPUT!\nTRYAGAIN!\033[0m\n") 
+            print("\nERROR: WRONG INPUT!\nTRYAGAIN!\n") 
             inp_mod()

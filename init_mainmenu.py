@@ -1,9 +1,9 @@
 import os
 
 def mainmenu():
-        print("\n"+"\033[1;20;34m=\033[0m"*19)
-        print("\033[1;20;34m|::: MAIN MENU :::|\033[0m")
-        print("\033[1;20;34m=\033[0m"*19)
+        print("\n"+"="*19)
+        print("|::: MAIN MENU :::|")
+        print("="*19)
         print('''
 CHOOSE THE OPTION FROM THE FOLLOWING:
 1 - TRANSFER MONEY
@@ -24,6 +24,11 @@ CHOOSE THE OPTION FROM THE FOLLOWING:
                 print("_"*os.get_terminal_size().columns)
                 import Transaction
                 Transaction.init_transfermoney()
+            if inp_conf == 2:
+                 print()
+                 print("_"*os.get_terminal_size().columns)
+                 import acc_services
+                 acc_services.init_accser()
         else:
-            print("\033[1;20;31m\nERROR: WRONG INPUT!\nTRYAGAIN!\033[0m\n")
+            print("\nERROR: WRONG INPUT!\nTRYAGAIN!\n")
             inp_confi()

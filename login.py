@@ -18,9 +18,9 @@ login = False
 
 def create_acc():
     print()
-    print("\033[1;20;96m=\033[0m"*32)
-    print("\033[1;20;96m|::: ACCOUNT CREATION PAGE :::|\033[0m")
-    print("\033[1;20;96m=\033[0m"*32,"\n")
+    print("="*32)
+    print("|::: ACCOUNT CREATION PAGE :::|")
+    print("="*32,"\n")
     # A new function to ignore the above print statement
     name = input("FULL NAME: ").upper()
     gender = input("GENDER: ").upper()
@@ -42,8 +42,8 @@ def create_acc():
                 spc = True
         if [caps,small,digit,space,spc] != [True,True,True,False,True]:
             
-            print("\033[1;20;31m\nERROR: WRONG INPUT!\033[0m")
-            print("\033[1;20;31mYOUR PASSWORD SHOULD HAVE ATLEAST ONE CAPITAL,SMALL,DIGIT,SPACE AND SPECIAL-CHARACTER.\n\033[0m")
+            print("\nERROR: WRONG INPUT!")
+            print("YOUR PASSWORD SHOULD HAVE ATLEAST ONE CAPITAL,SMALL,DIGIT,SPACE AND SPECIAL-CHARACTER.\n")
             passwd()
         else:
             repeat()
@@ -51,7 +51,7 @@ def create_acc():
         global c_passwd
         c_passwd = input("REPEAT PASSWORD: ")
         while n_passwd != c_passwd:
-            print("\033[1;20;31m\nERROR: PASSWORDS DOES NOT MATCH\n\033[0m")
+            print("\nERROR: PASSWORDS DOES NOT MATCH\n")
             passwd()
             break
     passwd()
@@ -94,7 +94,7 @@ def create_acc():
                     chkforat = True
                     break
             while chkforat == False:
-                print("\033[1;20;31m\n##### ERROR: INCORRECT EMAIL #####\n\033[0m")
+                print("\n##### ERROR: INCORRECT EMAIL #####\n")
                 emai = input("mailid: ")
                 for i in emai:
                     if i == '@':
@@ -267,13 +267,13 @@ def create_acc():
             mycursor.execute(formula1,acc_deta)
             mydb.commit()
 
-            print("\033[1;20;34m\n##### YOU'RE NEWLY GENERATED USER ID:#####\033[0m",f"\033[1;20;33m{gn_uid}\033[0m,\033[1;20;34m#####\033[0m")
-            print("\033[1;20;34m\n##### PASSWORD:\033[0m",f"\033[1;20;33m{c_passwd}\033[0m"+"\033[1;20;34m #####\n\033[0m")
+            print("\n##### YOU'RE NEWLY GENERATED USER ID:#####",f"{gn_uid},#####")
+            print("\n##### PASSWORD:",f"{c_passwd}"+" #####\n")
         print(df_acc_data,'\n')
         
         print("\n"+"-"*40)
         print("+++++",end="")
-        print("\033[1;20;33m ACCOUNT CREATION SUCCESSFULL \033[0m",end="")
+        print(" ACCOUNT CREATION SUCCESSFULL ",end="")
         print("+++++")
         print("-"*40)
         terminal_width = os.get_terminal_size().columns
@@ -284,9 +284,9 @@ def create_acc():
 
 def signin():
     
-    print("\n"+"\033[1;20;92m=\033[0m"*22)
-    print("\033[1;20;92m|::: SIGN-IN PAGE :::|\033[0m")
-    print("\033[1;20;92m=\033[0m"*22,"\n")
+    print("\n"+"="*22)
+    print("|::: SIGN-IN PAGE :::|")
+    print("="*22,"\n")
 
     formula = f"select uid from acc_details"
     mycursor.execute(formula)
@@ -315,12 +315,12 @@ def signin():
         i = 2
         while uid_pass == False:
             if i != 0:
-                print("\033[1;20;31m\n### ERROR: INCORRECT UID ###\033[0m")
+                print("\n### ERROR: INCORRECT UID ###")
                 inp_uid = input(f"YOU HAVE {i} MORE CHANCE\n\nRE-ENTER UID: ")
                 if inp_uid in arr_retrived_uid:
                     uid_pass = True
             else:
-                print("\033[1;20;33m\n### ####### ###\nYOU'RE GIVEN INPUTS ARE OVER\n\nTHANK YOU!\n\033[0m")
+                print("\n### ####### ###\nYOU'RE GIVEN INPUTS ARE OVER\n\nTHANK YOU!\n")
                 quit()
             i-=1
 
@@ -333,17 +333,17 @@ def signin():
         i = 2
         while passwd_pass == False:
             if i != 0:
-                print("\033[1;20;31m\n### ERROR: INCORRECT PASSWORD ###\033[0m")
+                print("\n### ERROR: INCORRECT PASSWORD ###")
                 inp_passwd = input(f"YOU HAVE {i} MORE CHANCE\n\nRE-ENTER PASSWORD: ")
                 if inp_passwd in arr_retrived_passwd:
                     passwd_pass = True
             else:
-                print("\033[1;20;33m\n### ####### ###\nYOU'RE GIVEN INPUTS ARE OVER\n\nTHANK YOU!\n\033[0m")
+                print("\n### ####### ###\nYOU'RE GIVEN INPUTS ARE OVER\n\nTHANK YOU!\n")
                 quit()
             i-=1
     print("\n"+"-"*34)
     print("+++++",end="")
-    print("\033[1;20;33m SUCCESSFULLY SIGNED-IN \033[0m",end="")
+    print(" SUCCESSFULLY SIGNED-IN ",end="")
     print("+++++")
     print("-"*34)
     terminal_width = os.get_terminal_size().columns
@@ -375,5 +375,5 @@ CHOOSE THE OPTION FROM THE FOLLOWING:
             admin()
             break
     else:
-        print("\033[1;20;31m\nERROR: WRONG INPUT!\nTRYAGAIN!\033[0m")         
+        print("\nERROR: WRONG INPUT!\nTRYAGAIN!")         
         init_login()
