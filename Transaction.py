@@ -686,9 +686,8 @@ CHOOSE YOUR MODE OF TRANSACTION
                 print("""
 DIGITAL DEPOSIT OPTIONS
 1 - UPI
-2 - NET BANKING
-3 - WALLET
-4 - MAIN MENU
+2 - WALLET
+3 - MAIN MENU
 """)
                 # Function to repeat the input if the user gives a wrong input
                 def inp_dep_opti():
@@ -699,9 +698,9 @@ DIGITAL DEPOSIT OPTIONS
                 if inp_dep_opt in [1,2,3]:
                     if inp_dep_opt == 1:
                         upi()
-                    if inp_dep_opt == 3:
+                    if inp_dep_opt == 2:
                         wallet()
-                    if inp_dep_opt == 4:
+                    if inp_dep_opt == 3:
                         print("_"*os.get_terminal_size().columns)
                         import init_mainmenu
                         init_mainmenu.mainmenu()
@@ -715,8 +714,7 @@ DIGITAL DEPOSIT OPTIONS
                 print("""
 DIGITAL WITHDRAWL OPTIONS
 1 - UPI
-2 - NET BANKING
-3 - MAIN MENU
+2 - MAIN MENU
 """)
                 # Function to repeat the input if the user gives a wrong input
                 def inp_wit_opti():
@@ -724,12 +722,12 @@ DIGITAL WITHDRAWL OPTIONS
                     global inp_wit_opt
                     inp_wit_opt = int(input(">>> "))
                 inp_wit_opti()
-                if inp_wit_opt in [1,2,3]:
+                if inp_wit_opt in [1,2]:
                     if inp_wit_opt == 1:
                         # Making a bool to make sure deposit and withdraw do not coincide
                         withdrawl = True
                         upi()
-                    if inp_wit_opt == 3:
+                    if inp_wit_opt == 2:
                         print("_"*os.get_terminal_size().columns)
                         import init_mainmenu
                         init_mainmenu.mainmenu()

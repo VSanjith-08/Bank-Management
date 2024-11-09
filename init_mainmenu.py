@@ -40,3 +40,5 @@ CHOOSE THE OPTION FROM THE FOLLOWING:
         else:
             print("\nERROR: WRONG INPUT!\nTRYAGAIN!\n")
             inp_confi()
+terminal_width = os.get_terminal_size().columns
+print("_"*terminal_width)
