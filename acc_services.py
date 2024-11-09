@@ -131,7 +131,24 @@ def repeat():
         print("\nERROR: PASSWORDS DOES NOT MATCH\n")
         reset_passwd()
         break
+def do_u_want_to_continue():
+    inp = input("DO YOU WANT TO CONTINUE [y/Y OR n/N]: ").lower()
 
+    if inp in ['y','n']:
+        if inp == 'y':
+            import init_mainmenu
+            terminal_width = os.get_terminal_size().columns
+            print("_"*terminal_width)
+            print()
+            init_mainmenu.mainmenu()
+        elif inp == 'n':
+            quit()
+    else:
+        print()
+        print('ERROR: INCORRECT INPUT')
+        do_u_want_to_continue()
+    
+        
 def init_accser():
     print("\n"+"="*31)
     print("|::: ACCOUNT SERVICES PAGE :::|")
@@ -153,30 +170,32 @@ CHOOSE THE TYPE OF ACCOUNT SERVICE
 """)
     # Function to repeat the input if the user gives a wrong input
     inp_mode = int(input(">>> "))
-    def imp_mod():
-        global inp_mode
+    while inp_mode not in [1,2,3,4,5,6]:
+        print()
+        print("ERROR: INCORRECT INPUT")
         inp_mode = int(input(">>> "))
 
-    if inp_mode in [1,2,3,4,5,6]:
-        if inp_mode == 1:
-            bank_bal()
-        if inp_mode == 2:
-            mini_statement()
-        if inp_mode == 3:
-            acc_statement()
-        if inp_mode == 4:
-            acc_details()
-        if inp_mode == 5:
-            reset_passwd()
-            terminal_width = os.get_terminal_size().columns
-            print("_"*terminal_width)
-            print()
-        if inp_mode == 6:
-            import init_mainmenu
-            terminal_width = os.get_terminal_size().columns
-            print("_"*terminal_width)
-            print()
-            init_mainmenu.mainmenu()
-    else:
-        imp_mod()
-        
+    if inp_mode == 1:
+        bank_bal()
+        do_u_want_to_continue()
+    if inp_mode == 2:
+        mini_statement()
+        do_u_want_to_continue()
+    if inp_mode == 3:
+        acc_statement()
+        do_u_want_to_continue()
+    if inp_mode == 4:
+        acc_details()
+        do_u_want_to_continue()
+    if inp_mode == 5:
+        reset_passwd()
+        terminal_width = os.get_terminal_size().columns
+        print("_"*terminal_width)
+        print()
+        do_u_want_to_continue()
+    if inp_mode == 6:
+        import init_mainmenu
+        terminal_width = os.get_terminal_size().columns
+        print("_"*terminal_width)
+        print()
+        init_mainmenu.mainmenu()

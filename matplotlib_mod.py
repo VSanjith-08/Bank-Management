@@ -41,23 +41,18 @@ CHOOSE THE TYPE OF ACCOUNT SERVICE
 
 3 - MAIN MENU
 """)
-    # Function to repeat the input if the user gives a wrong input
+    # command to repeat the input if the user gives a wrong input
+
     inp_mode = int(input(">>> "))
-    def imp_mod():
-        global inp_mode
-        inp_mode = int(input(">>> "))
-    if inp_mode in [1,2,3]:
-        if inp_mode == 1:
-            bar_plot()
-        elif inp_mode == 2:
-            line_plot()
-        elif inp_mode == 3:
-            import init_mainmenu
-            terminal_width = os.get_terminal_size().columns
-            print("_"*terminal_width)
-            print()
-            init_mainmenu.mainmenu()
-    else:
+    while inp_mode not in [1,2,3]:
         print("INCORRECT OPTION\nRE-ENTER THE CORRECT OPTION")
-        imp_mod()
-        
+        inp_mode = int(input(">>> "))
+
+    if inp_mode == 1:
+        bar_plot()
+    elif inp_mode == 2:
+        line_plot()
+    elif inp_mode == 3:
+        import init_mainmenu
+        print()
+        init_mainmenu.mainmenu()

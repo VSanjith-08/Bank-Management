@@ -1,4 +1,5 @@
 import os
+terminal_width = os.get_terminal_size().columns
 
 def mainmenu():
         print("\n"+"="*19)
@@ -22,23 +23,19 @@ CHOOSE THE OPTION FROM THE FOLLOWING:
         inp_confi()
         
         if inp_conf in [1,2,3]:
+            print("_"*terminal_width)
             if inp_conf == 1:
                 print()
-                print("_"*os.get_terminal_size().columns)
                 import Transaction
                 Transaction.init_transfermoney()
             if inp_conf == 2:
                  print()
-                 print("_"*os.get_terminal_size().columns)
                  import acc_services
                  acc_services.init_accser()
             if inp_conf == 3:
                 print()
-                print("_"*os.get_terminal_size().columns)
                 import matplotlib_mod as statista
                 statista.init_statista()
         else:
             print("\nERROR: WRONG INPUT!\nTRYAGAIN!\n")
             inp_confi()
-terminal_width = os.get_terminal_size().columns
-print("_"*terminal_width)

@@ -672,72 +672,61 @@ CHOOSE YOUR MODE OF TRANSACTION
 2 - WITHDRAW MONEY
 3 - MAIN MENU
 """)
-        # Function to repeat the input if the user gives a wrong input
-        def inp_mod():
-            # Global variable for choosing the mode of transaction
-            global inp_mode
+        
+        inp_mode = int(input(">>> "))
+        while inp_mode not in [1,2,3]:
+            print("\nERROR: WRONG INPUT!\nTRYAGAIN!") 
             inp_mode = int(input(">>> "))
-        inp_mod()
-        if inp_mode in [1,2,3]:
-            if inp_mode == 1:
-                # Making a bool to make sure deposit and withdraw do not coincide
-                global withdrawl
-                withdrawl = False
-                print("""
+
+        if inp_mode == 1:
+            # Making a bool to make sure deposit and withdraw do not coincide
+            global withdrawl
+            withdrawl = False
+            print("""
 DIGITAL DEPOSIT OPTIONS
 1 - UPI
 2 - WALLET
 3 - MAIN MENU
 """)
-                # Function to repeat the input if the user gives a wrong input
-                def inp_dep_opti():
-                    # Global variable for making the option viewalbe in the next row
-                    global inp_dep_opt
-                    inp_dep_opt = int(input(">>> "))
-                inp_dep_opti()
-                if inp_dep_opt in [1,2,3]:
-                    if inp_dep_opt == 1:
-                        upi()
-                    if inp_dep_opt == 2:
-                        wallet()
-                    if inp_dep_opt == 3:
-                        print("_"*os.get_terminal_size().columns)
-                        import init_mainmenu
-                        init_mainmenu.mainmenu()
-                else:
-                    print("\nERROR: WRONG INPUT!\nTRYAGAIN!\n")
-                    inp_dep_opti()
-            elif inp_mode == 2:
-                withdrawl = True
-                print("\nNOTE: YOUR WITHDRAWED MONEY WILL BE CREDITED TO YOUR WALLET")
-                print()
-                print("""
+            inp_dep_opt = int(input(">>> "))
+            while inp_dep_opt not in [1,2,3]:
+                print("\nERROR: WRONG INPUT!\nTRYAGAIN!")
+                inp_dep_opt = int(input(">>> "))
+
+            if inp_dep_opt == 1:
+                upi()
+            if inp_dep_opt == 2:
+                wallet()
+            if inp_dep_opt == 3:
+                print("_"*os.get_terminal_size().columns)
+                import init_mainmenu
+                init_mainmenu.mainmenu()
+
+        elif inp_mode == 2:
+            withdrawl = True
+            print("\nNOTE: YOUR WITHDRAWED MONEY WILL BE CREDITED TO YOUR WALLET")
+            print()
+            print("""
 DIGITAL WITHDRAWL OPTIONS
 1 - UPI
 2 - MAIN MENU
 """)
-                # Function to repeat the input if the user gives a wrong input
-                def inp_wit_opti():
-                    # Global variable for making the option viewalbe in the next row
-                    global inp_wit_opt
-                    inp_wit_opt = int(input(">>> "))
-                inp_wit_opti()
-                if inp_wit_opt in [1,2]:
-                    if inp_wit_opt == 1:
-                        # Making a bool to make sure deposit and withdraw do not coincide
-                        withdrawl = True
-                        upi()
-                    if inp_wit_opt == 2:
-                        print("_"*os.get_terminal_size().columns)
-                        import init_mainmenu
-                        init_mainmenu.mainmenu()
-                else:
-                    print("\nERROR: WRONG INPUT!\nTRYAGAIN!\n")
-                    inp_wit_opti()
-            elif inp_mode == 3:
+
+            inp_wit_opt = int(input(">>> "))
+            while inp_wit_opt not in [1,2]:
+                print("\nERROR: WRONG INPUT!\nTRYAGAIN!")
+                inp_wit_opt = int(input(">>> "))
+
+            if inp_wit_opt == 1:
+                # Making a bool to make sure deposit and withdraw do not coincide
+                withdrawl = True
+                upi()
+            if inp_wit_opt == 2:
                 print("_"*os.get_terminal_size().columns)
                 import init_mainmenu
                 init_mainmenu.mainmenu()
-        else:
-            print("\nERROR: WRONG INPUT!\nTRYAGAIN!\n") 
-            inp_mod()
+
+        elif inp_mode == 3:
+            print("_"*os.get_terminal_size().columns)
+            import init_mainmenu
+            init_mainmenu.mainmenu()
