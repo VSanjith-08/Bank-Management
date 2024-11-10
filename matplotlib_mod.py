@@ -33,7 +33,7 @@ def init_statista():
     print("|::: DEMOGRAPHICS :::|")
     print("="*22)
     print("""
-CHOOSE THE TYPE OF ACCOUNT SERVICE
+CHOOSE THE TYPE OF DEMOGRAPHICS.
           
 1 - BAR PLOT
           
