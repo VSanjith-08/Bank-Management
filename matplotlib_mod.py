@@ -23,8 +23,7 @@ df_wallet = pd.read_csv("Database//wallet.csv",index_col = 0)
 df_transaction = pd.read_csv("Database//transaction.csv",index_col = 0)
 
 def bar_plot():
-    gender = df_acc_details["Gender"]
-    bar = plt.plot(kind='bar',x='gender',title='gender comparison')
+    bar = df_acc_details.plot(kind='bar',x='gender',title='gender comparison')
     print(bar)
 
 def line_plot():
