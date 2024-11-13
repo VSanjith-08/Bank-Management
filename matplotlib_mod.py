@@ -3,6 +3,7 @@ import numpy as np
 import os
 from datetime import datetime
 import mysql.connector
+import matplotlib.pyplot as plt
 
 mydb = mysql.connector.connect(
     host = "localhost",
@@ -22,10 +23,12 @@ df_wallet = pd.read_csv("Database//wallet.csv",index_col = 0)
 df_transaction = pd.read_csv("Database//transaction.csv",index_col = 0)
 
 def bar_plot():
-    print("bar plot")
+    gender = df_acc_details["gender"]
+    bar = plt.plot(kind='bar',x='gender',title='gender comparison')
+    print(bar)
 
 def line_plot():
-    print("line plot")
+    
 
 
 def init_statista():
