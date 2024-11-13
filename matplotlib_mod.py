@@ -23,7 +23,7 @@ df_wallet = pd.read_csv("Database//wallet.csv",index_col = 0)
 df_transaction = pd.read_csv("Database//transaction.csv",index_col = 0)
 
 def bar_plot():
-    df_acc_details.plot(kind='bar',x='gender',title='gender comparison')
+    df_acc_details.plot(kind='bar',x=8,title='gender comparison')
     plt.ylabel('gender')
     plt.show()
 
