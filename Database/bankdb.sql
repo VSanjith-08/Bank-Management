@@ -42,7 +42,7 @@ CREATE TABLE `acc_details` (
 
 LOCK TABLES `acc_details` WRITE;
 /*!40000 ALTER TABLE `acc_details` DISABLE KEYS */;
-INSERT INTO `acc_details` VALUES ('D VALARMATHY','valarmathy764@okjstbnk',1854993,'JSTBNK02','2024-08-14 00:00:00','DVALARM243','tn','2007-08-31','F','Valarmathy123.'),('sanjith','sanjith@ok',31082007,'JSTBNK01','2007-08-31 00:00:00','sanjith','tn','2007-08-31','M','sanjith');
+INSERT INTO `acc_details` VALUES ('D VALARMATHY','valarmathy764@okjstbnk',1854993,'JSTBNK02','2024-08-14 00:00:00','DVALARM243','tn','2007-08-31','F','Valarmathy123.'),('sanjith','sanjith@ok',31082007,'JSTBNK01','2007-08-31 00:00:00','sanjith','tn','2007-08-31','M','sanjith'),('VIJAYAKUMAR','vijayakumar442@okjstbnk',1312930,'JSTBNK58','2024-08-15 00:00:00','VIJAYAK199','tn','2007-08-31','M','Vijayakumar123.'),('RAM SWAMY','sda319@okjstbnk',2323576,'JSTBNK01','2024-08-15 00:00:00','RAMSWAM216','tn','2021-09-21','M','Ra1.'),('VSANJITH','vsanjith.ind667@okjstbnk',8904783,'JSTBNK23','2024-09-06 00:00:00','VSANJIT913','kl','2007-08-31','M','Sanjith123.'),('VSANJITH','san@san',1000000,'JSTBNK02','2007-08-31 00:00:00','san','tn','2007-08-31','F','sanjith123.'),('V SANJITH','sanjith603@okjstbnk',4498453,'JSTBNK58','2024-09-08 00:00:00','VSANJIT602','tn','2007-08-31','M','Sanjith123.');
 /*!40000 ALTER TABLE `acc_details` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-14 23:44:25
+-- Dump completed on 2024-10-27 19:46:16
+

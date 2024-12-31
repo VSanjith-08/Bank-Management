@@ -5,18 +5,18 @@ def title():
     terminal_width = os.get_terminal_size().columns
     design_before = center_text("=" * terminal_width, terminal_width)
     design_after = center_text("=" * terminal_width, terminal_width)
-    w1 = "\033[1;20;33m     _           _       ____              _    \033[0m"
-    w2 = "\033[1;20;33m     | |_   _ ___| |_    | __ )  __ _ _ __ | | __ \033[0m"
-    w3 = "\033[1;20;33m _  | | | | / __| __|   |  _ \\ / _` | '_ \\| |/ /\033[0m"
-    w4 = "\033[1;20;33m| |_| | |_| \\__ \\ |_    | |_) | (_| | | | |   < \033[0m"
-    w5 = "\033[1;20;33m  \\___/ \\__,_|___/\\__|   |____/ \\__,_|_| |_|_|\\_\\\033[0m"
+    w1 = "     _           _       ____              _    "
+    w2 = "     | |_   _ ___| |_    | __ )  __ _ _ __ | | __ "
+    w3 = " _  | | | | / __| __|   |  _ \\ / _` | '_ \\| |/ /"
+    w4 = "| |_| | |_| \\__ \\ |_    | |_) | (_| | | | |   < "
+    w5 = "  \\___/ \\__,_|___/\\__|   |____/ \\__,_|_| |_|_|\\_\\"
     print(design_before,end="")  
     print(center_text(w1, terminal_width))  
     print(center_text(w2, terminal_width)) 
     print(center_text(w3, terminal_width)) 
     print(center_text(w4, terminal_width)) 
     print(center_text(w5, terminal_width),'\n') 
-    print(center_text("\033[1;20;33mAN ONLINE BANKING SERVICE\033[0m",terminal_width))
+    print(center_text("AN ONLINE BANKING SERVICE",terminal_width))
     print(design_after)
     
                                         
